@@ -24,21 +24,29 @@ type Service = {
   rating: number;
   reviews: number;
   description: string;
+<<<<<<< HEAD
   Icon: typeof Droplets;
   gradient: string;
   image: string;
+=======
+  imageUrl: string;
+>>>>>>> d63c06f ( Enhanced ui)
 };
 
 const services: Service[] = [
   {
-    title: "Overhead Tank Cleaning (1000 ltrs.)",
+    title: "Over head Tank Cleaning (1000 ltrs.)",
     vendor: "Clean Services",
     price: "Rs 1,500.00",
     rating: 4.6, reviews: 8,
     description: "Ensure your family's health with safe and hygienic water! Our overhead tank cleaning…",
+<<<<<<< HEAD
     Icon: Droplets,
     gradient: "from-sky-400 to-blue-600",
     image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=70",
+=======
+    imageUrl: "/images/Screenshot 2026-06-03 230648.png",
+>>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Reserve Tank Cleaning",
@@ -46,9 +54,13 @@ const services: Service[] = [
     price: "Rs 2,400.00",
     rating: 4.6, reviews: 8,
     description: "Keep your water safe and hygienic with our expert reserve tank cleaning service in…",
+<<<<<<< HEAD
     Icon: Waves,
     gradient: "from-orange-400 to-amber-600",
     image: "https://images.unsplash.com/photo-1607472586893-edc57bbc5fab?auto=format&fit=crop&w=800&q=70",
+=======
+    imageUrl: "/images/Screenshot 2026-06-03 230703.png",
+>>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Overhead Tank Cleaning (Up to 2000 ltrs.)",
@@ -56,9 +68,13 @@ const services: Service[] = [
     price: "Rs 2,000.00",
     rating: 4.6, reviews: 8,
     description: "Ensure safe and hygienic water for your home or business with professional…",
+<<<<<<< HEAD
     Icon: ShowerHead,
     gradient: "from-cyan-400 to-blue-700",
     image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=70",
+=======
+    imageUrl: "/images/Screenshot 2026-06-03 230715.png",
+>>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Overhead Tank Cleaning (Up to 3000 ltrs.)",
@@ -66,39 +82,55 @@ const services: Service[] = [
     price: "Rs 3,000.00",
     rating: 4.6, reviews: 8,
     description: "Protect your family's health and ensure clean, safe water with Overhead Tank…",
+<<<<<<< HEAD
     Icon: Droplets,
     gradient: "from-yellow-400 to-orange-500",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=70",
+=======
+    imageUrl: "/images/Screenshot 2026-06-03 230723.png",
+>>>>>>> d63c06f ( Enhanced ui)
   },
   {
-    title: "Overhead Tank Cleaning ( 5000 ltrs.)",
+    title: "Over head Tank Cleaning ( 5000 ltrs.)",
     vendor: "Clean Services",
     price: "Rs 4,000.00",
     rating: 4.6, reviews: 8,
     description: "Ensure your water remains safe and hygienic with a thorough deep-clean service…",
+<<<<<<< HEAD
     Icon: ShieldCheck,
     gradient: "from-teal-400 to-cyan-700",
     image: "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=800&q=70",
+=======
+    imageUrl: "/images/Screenshot 2026-06-03 230730.png",
+>>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Septic Tank Cleaning",
-    vendor: "शुभ आरम्भ Cleaning",
-    price: "Rs 5,500.00",
+    vendor: "Valley Clean Nepal",
+    price: "From Rs 5,500.00",
     rating: 1.0, reviews: 1,
     description: "Maintain hygiene and prevent sewage backups with our professional septic tank…",
+<<<<<<< HEAD
     Icon: Truck,
     gradient: "from-emerald-500 to-green-700",
     image: "https://images.unsplash.com/photo-1597007030739-6d2e7172ee6c?auto=format&fit=crop&w=800&q=70",
+=======
+    imageUrl: "/images/Screenshot 2026-06-03 230737.png",
+>>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Sewage & Drainage Cleaning Service",
-    vendor: "शुभ आरम्भ Cleaning",
+    vendor: "Valley Clean Nepal",
     price: "From Rs 500.00",
     rating: 1.0, reviews: 1,
     description: "Blocked pipes, clogged drains, or sewage backflow? We unclog and restore flow fast.",
+<<<<<<< HEAD
     Icon: Wrench,
     gradient: "from-slate-500 to-slate-800",
     image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=800&q=70",
+=======
+    imageUrl: "/images/Screenshot 2026-06-03 230743.png",
+>>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Plumbing Repair & Installation",
@@ -106,9 +138,13 @@ const services: Service[] = [
     price: "From Rs 800.00",
     rating: 4.8, reviews: 12,
     description: "Leaks, pipe bursts, fittings and full installation — certified plumbers at your door.",
+<<<<<<< HEAD
     Icon: Hammer,
     gradient: "from-indigo-500 to-purple-700",
     image: "https://images.unsplash.com/photo-1606613666510-3d1f7e8d8b40?auto=format&fit=crop&w=800&q=70",
+=======
+    imageUrl: "/images/Screenshot 2026-06-03 230648.png",
+>>>>>>> d63c06f ( Enhanced ui)
   },
 ];
 
@@ -117,7 +153,6 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <Hero />
-      <Features />
       <ServicesSection />
       <Stats />
       <CTA />
@@ -154,7 +189,16 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[var(--brand-deep)] via-[var(--brand)] to-sky-500 text-primary-foreground">
+    <section className="relative overflow-hidden text-primary-foreground">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp')"
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-deep)]/95 via-[var(--brand)]/90 to-sky-500/85" />
+      
       <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 60%, white 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
         <div>
@@ -203,30 +247,6 @@ function Hero() {
   );
 }
 
-function Features() {
-  const items = [
-    { I: ShieldCheck, t: "100% Hygienic", d: "Eco-safe disinfectants and tested equipment on every job." },
-    { I: Clock, t: "Same-Day Service", d: "Book before 2 PM and get serviced the same day." },
-    { I: Users, t: "Trained Crew", d: "Background-checked, uniformed, insured professionals." },
-    { I: BadgeCheck, t: "Transparent Pricing", d: "No hidden fees. See the rate before you book." },
-  ];
-  return (
-    <section id="features" className="border-b border-border bg-muted/40 py-14">
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
-        {items.map(({ I, t, d }) => (
-          <div key={t} className="rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand)]/10 text-[var(--brand)]">
-              <I size={24} />
-            </div>
-            <div className="mt-4 font-bold">{t}</div>
-            <div className="mt-1 text-sm text-muted-foreground">{d}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function ServicesSection() {
   return (
     <section id="services" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -247,9 +267,9 @@ function ServicesSection() {
 }
 
 function ServiceCard({ s }: { s: Service }) {
-  const { Icon } = s;
   return (
     <article className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+<<<<<<< HEAD
       <div className={`relative aspect-[4/3] overflow-hidden bg-gradient-to-br ${s.gradient}`}>
         <img
           src={s.image}
@@ -262,13 +282,20 @@ function ServiceCard({ s }: { s: Service }) {
         <div className="absolute right-3 top-3 rounded-full bg-white/95 px-2 py-1 text-[11px] font-bold text-[var(--brand-deep)]">
           {s.vendor.includes("शुभ") ? "Our Service" : "Partner"}
         </div>
+=======
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <img
+          src={s.imageUrl}
+          alt={s.title}
+          className="h-full w-full object-cover transition group-hover:scale-105"
+        />
+>>>>>>> d63c06f ( Enhanced ui)
       </div>
       <div className="p-4">
         <h3 className="line-clamp-1 font-bold text-foreground">{s.title}</h3>
         <div className="mt-2 flex items-center justify-between text-sm">
           <div className="flex items-center gap-1 text-muted-foreground">
             <span>{s.vendor}</span>
-            <BadgeCheck size={14} className="fill-[var(--verified)] text-white" />
           </div>
           <div className="flex items-center gap-1">
             <Star size={14} className="fill-[var(--rating)] text-[var(--rating)]" />
@@ -278,9 +305,6 @@ function ServiceCard({ s }: { s: Service }) {
         </div>
         <div className="mt-3 text-base font-bold text-[var(--price)]">{s.price}</div>
         <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{s.description}</p>
-        <button className="mt-4 w-full rounded-lg bg-[var(--brand)] py-2 text-sm font-semibold text-primary-foreground transition hover:bg-[var(--brand-deep)]">
-          Book Now
-        </button>
       </div>
     </article>
   );
