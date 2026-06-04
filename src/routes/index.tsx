@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   Phone, Mail, MapPin, Star, BadgeCheck, Droplets, Wrench, Truck,
-  ShowerHead, Waves, Hammer, ShieldCheck, Clock, Users, ArrowRight,
+  Waves, ShieldCheck, Clock, ArrowRight,
   Facebook, Instagram, MessageCircle,
 } from "lucide-react";
 
@@ -24,13 +24,7 @@ type Service = {
   rating: number;
   reviews: number;
   description: string;
-<<<<<<< HEAD
-  Icon: typeof Droplets;
-  gradient: string;
-  image: string;
-=======
   imageUrl: string;
->>>>>>> d63c06f ( Enhanced ui)
 };
 
 const services: Service[] = [
@@ -40,13 +34,7 @@ const services: Service[] = [
     price: "Rs 1,500.00",
     rating: 4.6, reviews: 8,
     description: "Ensure your family's health with safe and hygienic water! Our overhead tank cleaning…",
-<<<<<<< HEAD
-    Icon: Droplets,
-    gradient: "from-sky-400 to-blue-600",
-    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=70",
-=======
     imageUrl: "/images/Screenshot 2026-06-03 230648.png",
->>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Reserve Tank Cleaning",
@@ -54,13 +42,7 @@ const services: Service[] = [
     price: "Rs 2,400.00",
     rating: 4.6, reviews: 8,
     description: "Keep your water safe and hygienic with our expert reserve tank cleaning service in…",
-<<<<<<< HEAD
-    Icon: Waves,
-    gradient: "from-orange-400 to-amber-600",
-    image: "https://images.unsplash.com/photo-1607472586893-edc57bbc5fab?auto=format&fit=crop&w=800&q=70",
-=======
     imageUrl: "/images/Screenshot 2026-06-03 230703.png",
->>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Overhead Tank Cleaning (Up to 2000 ltrs.)",
@@ -68,13 +50,7 @@ const services: Service[] = [
     price: "Rs 2,000.00",
     rating: 4.6, reviews: 8,
     description: "Ensure safe and hygienic water for your home or business with professional…",
-<<<<<<< HEAD
-    Icon: ShowerHead,
-    gradient: "from-cyan-400 to-blue-700",
-    image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=70",
-=======
     imageUrl: "/images/Screenshot 2026-06-03 230715.png",
->>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Overhead Tank Cleaning (Up to 3000 ltrs.)",
@@ -82,13 +58,7 @@ const services: Service[] = [
     price: "Rs 3,000.00",
     rating: 4.6, reviews: 8,
     description: "Protect your family's health and ensure clean, safe water with Overhead Tank…",
-<<<<<<< HEAD
-    Icon: Droplets,
-    gradient: "from-yellow-400 to-orange-500",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=70",
-=======
     imageUrl: "/images/Screenshot 2026-06-03 230723.png",
->>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Over head Tank Cleaning ( 5000 ltrs.)",
@@ -96,13 +66,7 @@ const services: Service[] = [
     price: "Rs 4,000.00",
     rating: 4.6, reviews: 8,
     description: "Ensure your water remains safe and hygienic with a thorough deep-clean service…",
-<<<<<<< HEAD
-    Icon: ShieldCheck,
-    gradient: "from-teal-400 to-cyan-700",
-    image: "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=800&q=70",
-=======
     imageUrl: "/images/Screenshot 2026-06-03 230730.png",
->>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Septic Tank Cleaning",
@@ -110,13 +74,7 @@ const services: Service[] = [
     price: "From Rs 5,500.00",
     rating: 1.0, reviews: 1,
     description: "Maintain hygiene and prevent sewage backups with our professional septic tank…",
-<<<<<<< HEAD
-    Icon: Truck,
-    gradient: "from-emerald-500 to-green-700",
-    image: "https://images.unsplash.com/photo-1597007030739-6d2e7172ee6c?auto=format&fit=crop&w=800&q=70",
-=======
     imageUrl: "/images/Screenshot 2026-06-03 230737.png",
->>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Sewage & Drainage Cleaning Service",
@@ -124,13 +82,7 @@ const services: Service[] = [
     price: "From Rs 500.00",
     rating: 1.0, reviews: 1,
     description: "Blocked pipes, clogged drains, or sewage backflow? We unclog and restore flow fast.",
-<<<<<<< HEAD
-    Icon: Wrench,
-    gradient: "from-slate-500 to-slate-800",
-    image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=800&q=70",
-=======
     imageUrl: "/images/Screenshot 2026-06-03 230743.png",
->>>>>>> d63c06f ( Enhanced ui)
   },
   {
     title: "Plumbing Repair & Installation",
@@ -138,13 +90,7 @@ const services: Service[] = [
     price: "From Rs 800.00",
     rating: 4.8, reviews: 12,
     description: "Leaks, pipe bursts, fittings and full installation — certified plumbers at your door.",
-<<<<<<< HEAD
-    Icon: Hammer,
-    gradient: "from-indigo-500 to-purple-700",
-    image: "https://images.unsplash.com/photo-1606613666510-3d1f7e8d8b40?auto=format&fit=crop&w=800&q=70",
-=======
     imageUrl: "/images/Screenshot 2026-06-03 230648.png",
->>>>>>> d63c06f ( Enhanced ui)
   },
 ];
 
@@ -269,27 +215,12 @@ function ServicesSection() {
 function ServiceCard({ s }: { s: Service }) {
   return (
     <article className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-<<<<<<< HEAD
-      <div className={`relative aspect-[4/3] overflow-hidden bg-gradient-to-br ${s.gradient}`}>
-        <img
-          src={s.image}
-          alt={s.title}
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-110"
-          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-        />
-        <Icon size={64} strokeWidth={1.5} className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white/40" />
-        <div className="absolute right-3 top-3 rounded-full bg-white/95 px-2 py-1 text-[11px] font-bold text-[var(--brand-deep)]">
-          {s.vendor.includes("शुभ") ? "Our Service" : "Partner"}
-        </div>
-=======
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={s.imageUrl}
           alt={s.title}
           className="h-full w-full object-cover transition group-hover:scale-105"
         />
->>>>>>> d63c06f ( Enhanced ui)
       </div>
       <div className="p-4">
         <h3 className="line-clamp-1 font-bold text-foreground">{s.title}</h3>
