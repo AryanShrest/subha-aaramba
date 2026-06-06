@@ -8,10 +8,10 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "शुभ आरम्भ Cleaning Service | Sewer, Tank & Plumbing Cleaning Kathmandu" },
-      { name: "description", content: "Professional sewer, water tank, septic and plumbing cleaning services in Kathmandu. Trusted, hygienic, affordable. Book online today." },
-      { property: "og:title", content: "शुभ आरम्भ Cleaning Service | Kathmandu" },
-      { property: "og:description", content: "Sewer, tank & plumbing cleaning specialists serving Kathmandu valley." },
+      { title: "Clean Tank Nepal | Water Tank, Septic & Plumbing Cleaning Kathmandu" },
+      { name: "description", content: "Clean Tank Nepal offers professional overhead tank, reserve tank, septic tank, sewage and plumbing cleaning in Kathmandu, Lalitpur & Bhaktapur. Trusted, affordable, same-day service. Book now." },
+      { property: "og:title", content: "Clean Tank Nepal | Water Tank & Plumbing Cleaning Kathmandu" },
+      { property: "og:description", content: "Professional tank cleaning, septic & sewage clearing, and plumbing services across Kathmandu valley. Verified workers. Same-day service." },
     ],
   }),
   component: Index,
@@ -152,7 +152,7 @@ function Hero() {
             <BadgeCheck size={14} /> Trusted in Kathmandu Valley
           </div>
           <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
-            Sewer, Tank & Plumbing Cleaning <span className="text-[var(--accent)]">Done Right.</span>
+            Clean Tank Nepal — Sewer, Tank &amp; Plumbing Cleaning <span className="text-[var(--accent)]">Done Right.</span>
           </h1>
           <p className="mt-5 max-w-xl text-base text-white/85 sm:text-lg">
             Hygienic water tank cleaning, septic & sewage clearing, and professional plumbing services across Kathmandu — booked in minutes.
@@ -218,7 +218,7 @@ function ServiceCard({ s }: { s: Service }) {
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={s.imageUrl}
-          alt={s.title}
+          alt={`${s.title} - Clean Tank Nepal professional cleaning service in Kathmandu`}
           className="h-full w-full object-cover transition group-hover:scale-105"
         />
       </div>

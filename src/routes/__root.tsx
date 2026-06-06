@@ -77,19 +77,69 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "keywords", content: "clean tank nepal, water tank cleaning nepal, tank cleaning kathmandu, septic tank cleaning kathmandu, plumbing service kathmandu, sewage cleaning nepal" },
+      { name: "author", content: "शुभ आरम्भ Cleaning Service" },
+      { name: "robots", content: "index, follow" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:url", content: "https://clean-tank-nepal.aaryanshrestha00.com.np" },
+      { property: "og:image", content: "https://clean-tank-nepal.aaryanshrestha00.com.np/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "geo.region", content: "NP-BA" },
+      { name: "geo.placename", content: "Kathmandu" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "canonical", href: "https://clean-tank-nepal.aaryanshrestha00.com.np" },
+    ],
+    scripts: [
       {
-        rel: "stylesheet",
-        href: appCss,
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "शुभ आरम्भ Cleaning Service",
+          "alternateName": "Clean Tank Nepal",
+          "description": "Professional water tank, septic tank, sewage and plumbing cleaning services in Kathmandu, Lalitpur and Bhaktapur.",
+          "url": "https://clean-tank-nepal.aaryanshrestha00.com.np",
+          "telephone": "+977-9800000000",
+          "image": "https://clean-tank-nepal.aaryanshrestha00.com.np/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp",
+          "priceRange": "Rs 500 - Rs 5500",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kathmandu",
+            "addressRegion": "Bagmati",
+            "addressCountry": "NP"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "27.7172",
+            "longitude": "85.3240"
+          },
+          "serviceArea": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": "27.7172",
+              "longitude": "85.3240"
+            },
+            "geoRadius": "30000"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Cleaning Services",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Overhead Tank Cleaning" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Septic Tank Cleaning" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sewage & Drainage Cleaning" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plumbing Repair & Installation" } }
+            ]
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.6",
+            "reviewCount": "38"
+          }
+        }),
       },
     ],
   }),
@@ -101,7 +151,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ne">
       <head>
         <HeadContent />
       </head>
