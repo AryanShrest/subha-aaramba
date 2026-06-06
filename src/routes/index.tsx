@@ -125,7 +125,7 @@ function Header() {
           <a href="#features" className="hover:text-[var(--brand)]">Why Us</a>
           <a href="#contact" className="hover:text-[var(--brand)]">Contact</a>
         </nav>
-        <a href="tel:+9779800000000" className="hidden items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-accent-foreground shadow-md transition hover:opacity-90 sm:inline-flex">
+        <a href="tel:+9779812330094" className="hidden items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-accent-foreground shadow-md transition hover:opacity-90 sm:inline-flex">
           <Phone size={16} /> Book Now
         </a>
       </div>
@@ -161,8 +161,8 @@ function Hero() {
             <a href="#services" className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-accent-foreground shadow-xl transition hover:opacity-90">
               View Services <ArrowRight size={16} />
             </a>
-            <a href="tel:+9779800000000" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-bold backdrop-blur hover:bg-white/20">
-              <Phone size={16} /> +977 98-0000-0000
+            <a href="tel:+9779812330094" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-bold backdrop-blur hover:bg-white/20">
+              <Phone size={16} /> +977 9812330094
             </a>
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-white/80">
@@ -271,8 +271,8 @@ function CTA() {
             <h2 className="text-3xl font-extrabold sm:text-4xl">Need cleaning today?</h2>
             <p className="mt-3 text-muted-foreground">Call or message us — we'll dispatch a verified crew anywhere in Kathmandu within hours.</p>
             <div className="mt-6 space-y-3 text-sm">
-              <div className="flex items-center gap-3"><Phone size={18} className="text-[var(--brand)]" /> +977 98-0000-0000</div>
-              <div className="flex items-center gap-3"><Mail size={18} className="text-[var(--brand)]" /> hello@shubharambh.np</div>
+              <div className="flex items-center gap-3"><Phone size={18} className="text-[var(--brand)]" /> +977 9812330094</div>
+              <div className="flex items-center gap-3"><Mail size={18} className="text-[var(--brand)]" /> netrashrestha0309@gmail.com</div>
               <div className="flex items-center gap-3"><MapPin size={18} className="text-[var(--brand)]" /> Kathmandu, Nepal</div>
             </div>
           </div>
@@ -334,8 +334,8 @@ function Footer() {
         <div>
           <div className="font-semibold text-white">Contact</div>
           <ul className="mt-3 space-y-2 text-sm">
-            <li>+977 98-0000-0000</li>
-            <li>hello@shubharambh.np</li>
+            <li>+977 9812330094</li>
+            <li>netrashrestha0309@gmail.com</li>
             <li>Kathmandu, Nepal</li>
           </ul>
         </div>
