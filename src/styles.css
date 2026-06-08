@@ -209,3 +209,78 @@
 .hero-visible .hero-buttons  { opacity: 1; transform: none; transition-delay: 0.55s; }
 .hero-visible .hero-badges   { opacity: 1; transform: none; transition-delay: 0.7s; }
 .hero-visible .hero-cards    { opacity: 1; transform: none; transition-delay: 0.4s; }
+
+/* Typewriter cursor */
+.typewriter-cursor::after {
+  content: "|";
+  animation: blink 0.8s step-end infinite;
+  margin-left: 2px;
+  color: var(--accent);
+}
+
+.typewriter-cursor.done::after {
+  display: none;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Shimmer text */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, currentColor 25%, var(--accent) 50%, currentColor 75%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Letter split animation */
+@keyframes letterDrop {
+  from { opacity: 0; transform: translateY(-20px) rotate(-5deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+.letter-animate span {
+  display: inline-block;
+  animation: letterDrop 0.5s ease both;
+}
+
+/* Slide in from bottom with blur */
+@keyframes blurUp {
+  from { opacity: 0; transform: translateY(20px); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.blur-up { animation: blurUp 0.7s ease both; }
+.blur-up-1 { animation: blurUp 0.7s ease both; animation-delay: 0.1s; }
+.blur-up-2 { animation: blurUp 0.7s ease both; animation-delay: 0.25s; }
+.blur-up-3 { animation: blurUp 0.7s ease both; animation-delay: 0.4s; }
+.blur-up-4 { animation: blurUp 0.7s ease both; animation-delay: 0.55s; }
+
+/* Highlight underline animation */
+.animated-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.animated-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.8s ease;
+}
+
+.hero-visible .animated-underline::after { width: 100%; transition-delay: 0.9s; }

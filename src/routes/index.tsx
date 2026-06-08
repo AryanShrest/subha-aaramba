@@ -5,7 +5,8 @@ import {
   Facebook, Instagram, MessageCircle,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useState, useEffect } from "react";
+import { useTypewriter, useCounter } from "@/hooks/useTextAnimations";
+import { useState, useEffect, type RefObject } from "react";
 import { supabase, type Service } from "@/lib/supabase";
 
 export const Route = createFileRoute("/")({
@@ -39,6 +40,7 @@ function Index() {
       <Stats />
       <CTA services={services} />
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 }
@@ -71,6 +73,7 @@ function Header() {
 
 function Hero() {
   const heroRef = useScrollAnimation<HTMLDivElement>("hero-visible", 0.1);
+  const { displayed, done } = useTypewriter("Clean Tank Nepal", 70, 300);
   return (
     <section className="relative overflow-hidden text-primary-foreground">
       <div
@@ -85,7 +88,12 @@ function Hero() {
             <BadgeCheck size={14} /> Trusted in Kathmandu Valley
           </div>
           <h1 className="hero-title mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
-            Clean Tank Nepal — Sewer, Tank &amp; Plumbing Cleaning <span className="text-[var(--accent)]">Done Right.</span>
+            <span className={`typewriter-cursor${done ? " done" : ""}`}>{displayed}</span>
+            {done && (
+              <> — Sewer, Tank &amp; Plumbing Cleaning{" "}
+                <span className="shimmer-text animated-underline">Done Right.</span>
+              </>
+            )}
           </h1>
           <p className="hero-subtitle mt-5 max-w-xl text-base text-white/85 sm:text-lg">
             Hygienic water tank cleaning, septic &amp; sewage clearing, and professional plumbing services across Kathmandu — booked in minutes.
@@ -99,9 +107,9 @@ function Hero() {
             </a>
           </div>
           <div className="hero-badges mt-8 flex flex-wrap items-center gap-6 text-sm text-white/80">
-            <div className="flex items-center gap-2"><ShieldCheck size={18} /> Verified workers</div>
-            <div className="flex items-center gap-2"><Clock size={18} /> Same-day service</div>
-            <div className="flex items-center gap-2"><Star size={18} className="fill-[var(--accent)] text-[var(--accent)]" /> 4.6 rated</div>
+            <div className="blur-up-1 flex items-center gap-2"><ShieldCheck size={18} /> Verified workers</div>
+            <div className="blur-up-2 flex items-center gap-2"><Clock size={18} /> Same-day service</div>
+            <div className="blur-up-3 flex items-center gap-2"><Star size={18} className="fill-[var(--accent)] text-[var(--accent)]" /> 4.6 rated</div>
           </div>
         </div>
         <div className="hero-cards relative hidden lg:block">
@@ -113,7 +121,7 @@ function Hero() {
               { I: Wrench, label: "Plumbing" },
               { I: Waves, label: "Sewage" },
             ].map(({ I, label }, i) => (
-              <div key={i} className="rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md transition hover:scale-105 hover:bg-white/20">
+              <div key={i} className={`blur-up-${i + 1} rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md transition hover:scale-105 hover:bg-white/20`}>
                 <I size={32} className="text-[var(--accent)]" />
                 <div className="mt-3 font-bold">{label}</div>
                 <div className="text-xs text-white/70">Pro service</div>
@@ -186,22 +194,34 @@ function ServiceCard({ s, index }: { s: Service; index: number }) {
   );
 }
 
+function StatCounter({ n, l }: { n: string; l: string }) {
+  const isNumeric = /^\d+/.test(n);
+  const numericPart = parseInt(n.replace(/\D/g, "")) || 0;
+  const suffix = n.replace(/^\d+/, "");
+  const { count, ref } = useCounter(isNumeric ? numericPart : 0, 1500);
+  return (
+    <div className="text-center">
+      <div ref={ref as RefObject<HTMLDivElement>} className="text-4xl font-extrabold text-[var(--accent)]">
+        {isNumeric ? `${count}${suffix}` : n}
+      </div>
+      <div className="mt-1 text-sm text-white/80">{l}</div>
+    </div>
+  );
+}
+
 function Stats() {
   const stats = [
-    { n: "5,000+", l: "Tanks cleaned" },
-    { n: "12+", l: "Years experience" },
-    { n: "4.6★", l: "Average rating" },
-    { n: "24/7", l: "Emergency support" },
+    { n: "5000", suffix: "+", l: "Tanks cleaned" },
+    { n: "12", suffix: "+", l: "Years experience" },
+    { n: "4.6", suffix: "★", l: "Average rating" },
+    { n: "24", suffix: "/7", l: "Emergency support" },
   ];
   const ref = useScrollAnimation<HTMLDivElement>();
   return (
     <section className="bg-gradient-to-r from-[var(--brand-deep)] to-[var(--brand)] py-12 text-primary-foreground">
       <div ref={ref} className="fade-up mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
         {stats.map((s, i) => (
-          <div key={s.l} className={`text-center fade-up delay-${(i + 1) * 100}`}>
-            <div className="text-4xl font-extrabold text-[var(--accent)]">{s.n}</div>
-            <div className="mt-1 text-sm text-white/80">{s.l}</div>
-          </div>
+          <StatCounter key={s.l} n={s.n} l={s.l} />
         ))}
       </div>
     </section>
@@ -241,6 +261,28 @@ function CTA({ services }: { services: Service[] }) {
         </div>
       </div>
     </section>
+  );
+}
+
+function WhatsAppButton() {
+  return (
+    <a
+      href="https://wa.me/9779812330094"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl transition hover:scale-105 hover:shadow-green-200"
+      style={{ border: "1.5px solid #e0f2e9" }}
+    >
+      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366]">
+        <svg viewBox="0 0 32 32" width="22" height="22" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.61 1.832 6.5L4 29l7.75-1.813A11.94 11.94 0 0 0 16 28c6.627 0 12-5.373 12-12S22.627 3 16 3zm5.894 16.472c-.247.693-1.443 1.32-1.97 1.374-.497.05-1.07.07-1.726-.108-.398-.108-.91-.28-1.557-.548-2.738-1.17-4.527-3.94-4.664-4.123-.138-.184-1.12-1.49-1.12-2.842 0-1.352.71-2.017 1.005-2.29.276-.253.607-.315.81-.315.203 0 .405.002.582.01.187.01.437-.07.684.522.253.604.86 2.088.935 2.24.075.15.125.327.025.527-.1.2-.15.323-.298.498-.148.176-.312.393-.445.528-.148.148-.302.308-.13.604.173.296.767 1.263 1.646 2.047 1.131 1.008 2.084 1.32 2.38 1.47.297.148.47.124.643-.074.173-.198.74-.863.937-1.16.198-.295.396-.247.668-.148.27.1 1.717.81 2.012.957.296.148.493.222.566.346.074.123.074.714-.173 1.407z"/>
+        </svg>
+      </div>
+      <div>
+        <div className="text-sm font-bold text-gray-800">WhatsApp</div>
+        <div className="text-xs text-gray-500">9812330094</div>
+      </div>
+    </a>
   );
 }
 
