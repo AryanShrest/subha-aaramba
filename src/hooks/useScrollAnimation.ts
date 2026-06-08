@@ -14,7 +14,8 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add(className);
-          observer.disconnect();
+        } else {
+          el.classList.remove(className);
         }
       },
       { threshold }

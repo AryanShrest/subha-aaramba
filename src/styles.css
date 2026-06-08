@@ -187,25 +187,25 @@
 .delay-400 { transition-delay: 0.4s; }
 .delay-500 { transition-delay: 0.5s; }
 
-/* Hero page-load animations */
-@keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(32px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* Hero scroll-triggered animations */
+.hero-badge,
+.hero-title,
+.hero-subtitle,
+.hero-buttons,
+.hero-badges,
+.hero-cards {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-@keyframes heroFadeLeft {
-  from { opacity: 0; transform: translateX(40px); }
-  to   { opacity: 1; transform: translateX(0); }
+.hero-cards {
+  transform: translateX(40px);
 }
 
-@keyframes heroBadge {
-  from { opacity: 0; transform: scale(0.85); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-.hero-badge    { animation: heroBadge  0.5s ease both; animation-delay: 0.1s; }
-.hero-title    { animation: heroFadeUp 0.7s ease both; animation-delay: 0.3s; }
-.hero-subtitle { animation: heroFadeUp 0.7s ease both; animation-delay: 0.5s; }
-.hero-buttons  { animation: heroFadeUp 0.7s ease both; animation-delay: 0.65s; }
-.hero-badges   { animation: heroFadeUp 0.7s ease both; animation-delay: 0.8s; }
-.hero-cards    { animation: heroFadeLeft 0.8s ease both; animation-delay: 0.5s; }
+.hero-visible .hero-badge    { opacity: 1; transform: none; transition-delay: 0.1s; }
+.hero-visible .hero-title    { opacity: 1; transform: none; transition-delay: 0.25s; }
+.hero-visible .hero-subtitle { opacity: 1; transform: none; transition-delay: 0.4s; }
+.hero-visible .hero-buttons  { opacity: 1; transform: none; transition-delay: 0.55s; }
+.hero-visible .hero-badges   { opacity: 1; transform: none; transition-delay: 0.7s; }
+.hero-visible .hero-cards    { opacity: 1; transform: none; transition-delay: 0.4s; }

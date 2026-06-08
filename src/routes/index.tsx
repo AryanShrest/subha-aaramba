@@ -135,19 +135,16 @@ function Header() {
 }
 
 function Hero() {
+  const heroRef = useScrollAnimation<HTMLDivElement>("hero-visible", 0.1);
   return (
     <section className="relative overflow-hidden text-primary-foreground">
-      {/* Background Image with Overlay */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp')"
-        }}
+        style={{ backgroundImage: "url('/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp')" }}
       />
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-deep)]/95 via-[var(--brand)]/90 to-sky-500/85" />
-      
       <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 60%, white 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
+      <div ref={heroRef} className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
         <div>
           <div className="hero-badge inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur">
             <BadgeCheck size={14} /> Trusted in Kathmandu Valley
@@ -156,7 +153,7 @@ function Hero() {
             Clean Tank Nepal — Sewer, Tank &amp; Plumbing Cleaning <span className="text-[var(--accent)]">Done Right.</span>
           </h1>
           <p className="hero-subtitle mt-5 max-w-xl text-base text-white/85 sm:text-lg">
-            Hygienic water tank cleaning, septic & sewage clearing, and professional plumbing services across Kathmandu — booked in minutes.
+            Hygienic water tank cleaning, septic &amp; sewage clearing, and professional plumbing services across Kathmandu — booked in minutes.
           </p>
           <div className="hero-buttons mt-8 flex flex-wrap gap-3">
             <a href="#services" className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-accent-foreground shadow-xl transition hover:opacity-90">
