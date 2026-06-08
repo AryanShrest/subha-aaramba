@@ -5,6 +5,8 @@ import {
   Facebook, Instagram, MessageCircle,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useState, useEffect } from "react";
+import { supabase, type Service } from "@/lib/supabase";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,91 +20,24 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Service = {
-  title: string;
-  vendor: string;
-  price: string;
-  rating: number;
-  reviews: number;
-  description: string;
-  imageUrl: string;
-};
-
-const services: Service[] = [
-  {
-    title: "Over head Tank Cleaning (1000 ltrs.)",
-    vendor: "Clean Services",
-    price: "Rs 1,500.00",
-    rating: 4.6, reviews: 8,
-    description: "Ensure your family's health with safe and hygienic water! Our overhead tank cleaning…",
-    imageUrl: "/images/Screenshot 2026-06-03 230648.png",
-  },
-  {
-    title: "Reserve Tank Cleaning",
-    vendor: "Clean Services",
-    price: "Rs 2,400.00",
-    rating: 4.6, reviews: 8,
-    description: "Keep your water safe and hygienic with our expert reserve tank cleaning service in…",
-    imageUrl: "/images/Screenshot 2026-06-03 230703.png",
-  },
-  {
-    title: "Overhead Tank Cleaning (Up to 2000 ltrs.)",
-    vendor: "Clean Services",
-    price: "Rs 2,000.00",
-    rating: 4.6, reviews: 8,
-    description: "Ensure safe and hygienic water for your home or business with professional…",
-    imageUrl: "/images/Screenshot 2026-06-03 230715.png",
-  },
-  {
-    title: "Overhead Tank Cleaning (Up to 3000 ltrs.)",
-    vendor: "Clean Services",
-    price: "Rs 3,000.00",
-    rating: 4.6, reviews: 8,
-    description: "Protect your family's health and ensure clean, safe water with Overhead Tank…",
-    imageUrl: "/images/Screenshot 2026-06-03 230723.png",
-  },
-  {
-    title: "Over head Tank Cleaning ( 5000 ltrs.)",
-    vendor: "Clean Services",
-    price: "Rs 4,000.00",
-    rating: 4.6, reviews: 8,
-    description: "Ensure your water remains safe and hygienic with a thorough deep-clean service…",
-    imageUrl: "/images/Screenshot 2026-06-03 230730.png",
-  },
-  {
-    title: "Septic Tank Cleaning",
-    vendor: "Valley Clean Nepal",
-    price: "From Rs 5,500.00",
-    rating: 1.0, reviews: 1,
-    description: "Maintain hygiene and prevent sewage backups with our professional septic tank…",
-    imageUrl: "/images/Screenshot 2026-06-03 230737.png",
-  },
-  {
-    title: "Sewage & Drainage Cleaning Service",
-    vendor: "Valley Clean Nepal",
-    price: "From Rs 500.00",
-    rating: 1.0, reviews: 1,
-    description: "Blocked pipes, clogged drains, or sewage backflow? We unclog and restore flow fast.",
-    imageUrl: "/images/Screenshot 2026-06-03 230743.png",
-  },
-  {
-    title: "Plumbing Repair & Installation",
-    vendor: "शुभ आरम्भ Cleaning",
-    price: "From Rs 800.00",
-    rating: 4.8, reviews: 12,
-    description: "Leaks, pipe bursts, fittings and full installation — certified plumbers at your door.",
-    imageUrl: "/images/Screenshot 2026-06-03 230648.png",
-  },
-];
-
 function Index() {
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase.from("services").select("*").order("created_at").then(({ data }) => {
+      if (data) setServices(data);
+      setLoading(false);
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <Hero />
-      <ServicesSection />
+      <ServicesSection services={services} loading={loading} />
       <Stats />
-      <CTA />
+      <CTA services={services} />
       <Footer />
     </div>
   );
@@ -191,7 +126,7 @@ function Hero() {
   );
 }
 
-function ServicesSection() {
+function ServicesSection({ services, loading }: { services: Service[]; loading: boolean }) {
   const titleRef = useScrollAnimation<HTMLDivElement>();
   return (
     <section id="services" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -204,24 +139,33 @@ function ServicesSection() {
         <h2 className="text-3xl font-extrabold sm:text-4xl">Services</h2>
         <a href="#" className="hidden text-sm font-semibold text-[var(--brand)] hover:underline sm:inline">View all →</a>
       </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {services.map((s, i) => <ServiceCard key={s.title} s={s} index={i} />)}
-      </div>
+      {loading ? (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {[...Array(4)].map((_, i) => <div key={i} className="h-64 animate-pulse rounded-2xl bg-muted" />)}
+        </div>
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {services.map((s, i) => <ServiceCard key={s.id} s={s} index={i} />)}
+        </div>
+      )}
     </section>
   );
 }
 
 function ServiceCard({ s, index }: { s: Service; index: number }) {
   const ref = useScrollAnimation<HTMLElement>();
-  const delays = ["delay-100", "delay-200", "delay-300", "delay-400", "delay-100", "delay-200", "delay-300", "delay-400"];
+  const delays = ["delay-100", "delay-200", "delay-300", "delay-400"];
   return (
     <article ref={ref} className={`zoom-in ${delays[index % 4]} group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl`}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
-          src={s.imageUrl}
+          src={s.image_url}
           alt={`${s.title} - Clean Tank Nepal professional cleaning service in Kathmandu`}
           className="h-full w-full object-cover transition group-hover:scale-105"
         />
+        {s.video_url && (
+          <div className="absolute bottom-2 right-2 rounded-full bg-black/60 px-2 py-1 text-[10px] text-white">▶ Video</div>
+        )}
       </div>
       <div className="p-4">
         <h3 className="line-clamp-1 font-bold text-foreground">{s.title}</h3>
@@ -264,7 +208,7 @@ function Stats() {
   );
 }
 
-function CTA() {
+function CTA({ services }: { services: Service[] }) {
   const leftRef = useScrollAnimation<HTMLDivElement>();
   const rightRef = useScrollAnimation<HTMLFormElement>();
   return (
