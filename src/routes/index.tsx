@@ -8,6 +8,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useTypewriter, useCounter } from "@/hooks/useTextAnimations";
 import { useState, useEffect, type RefObject } from "react";
 import { supabase, type Service } from "@/lib/supabase";
+import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -166,7 +167,8 @@ function ServiceCard({ s, index }: { s: Service; index: number }) {
   const ref = useScrollAnimation<HTMLElement>();
   const delays = ["delay-100", "delay-200", "delay-300", "delay-400"];
   return (
-    <article ref={ref} className={`zoom-in ${delays[index % 4]} group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl`}>
+    <Link to="/services/$id" params={{ id: s.id }} className="block">
+    <article ref={ref} className={`zoom-in ${delays[index % 4]} group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl`}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={s.image_url}
@@ -193,6 +195,7 @@ function ServiceCard({ s, index }: { s: Service; index: number }) {
         <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{s.description}</p>
       </div>
     </article>
+    </Link>
   );
 }
 
