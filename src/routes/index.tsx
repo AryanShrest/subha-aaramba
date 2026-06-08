@@ -33,15 +33,17 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
-      <Hero />
-      <ServicesSection services={services} loading={loading} />
-      <Stats />
-      <CTA services={services} />
-      <Footer />
+    <>
+      <div className="min-h-screen bg-background text-foreground">
+        <Header />
+        <Hero />
+        <ServicesSection services={services} loading={loading} />
+        <Stats />
+        <CTA services={services} />
+        <Footer />
+      </div>
       <WhatsAppButton />
-    </div>
+    </>
   );
 }
 
@@ -270,17 +272,36 @@ function WhatsAppButton() {
       href="https://wa.me/9779812330094"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl transition hover:scale-105 hover:shadow-green-200"
-      style={{ border: "1.5px solid #e0f2e9" }}
+      style={{
+        position: "fixed",
+        bottom: "24px",
+        right: "24px",
+        zIndex: 9999,
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        background: "white",
+        borderRadius: "16px",
+        padding: "10px 16px",
+        boxShadow: "0 8px 32px rgba(37,211,102,0.35), 0 2px 8px rgba(0,0,0,0.15)",
+        border: "2px solid #25D366",
+        textDecoration: "none",
+        transition: "transform 0.2s",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.07)")}
+      onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
     >
-      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#25D366]">
-        <svg viewBox="0 0 32 32" width="22" height="22" fill="white" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.61 1.832 6.5L4 29l7.75-1.813A11.94 11.94 0 0 0 16 28c6.627 0 12-5.373 12-12S22.627 3 16 3zm5.894 16.472c-.247.693-1.443 1.32-1.97 1.374-.497.05-1.07.07-1.726-.108-.398-.108-.91-.28-1.557-.548-2.738-1.17-4.527-3.94-4.664-4.123-.138-.184-1.12-1.49-1.12-2.842 0-1.352.71-2.017 1.005-2.29.276-.253.607-.315.81-.315.203 0 .405.002.582.01.187.01.437-.07.684.522.253.604.86 2.088.935 2.24.075.15.125.327.025.527-.1.2-.15.323-.298.498-.148.176-.312.393-.445.528-.148.148-.302.308-.13.604.173.296.767 1.263 1.646 2.047 1.131 1.008 2.084 1.32 2.38 1.47.297.148.47.124.643-.074.173-.198.74-.863.937-1.16.198-.295.396-.247.668-.148.27.1 1.717.81 2.012.957.296.148.493.222.566.346.074.123.074.714-.173 1.407z"/>
-        </svg>
+      <div style={{ position: "relative" }}>
+        <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <svg viewBox="0 0 32 32" width="24" height="24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.61 1.832 6.5L4 29l7.75-1.813A11.94 11.94 0 0 0 16 28c6.627 0 12-5.373 12-12S22.627 3 16 3zm5.894 16.472c-.247.693-1.443 1.32-1.97 1.374-.497.05-1.07.07-1.726-.108-.398-.108-.91-.28-1.557-.548-2.738-1.17-4.527-3.94-4.664-4.123-.138-.184-1.12-1.49-1.12-2.842 0-1.352.71-2.017 1.005-2.29.276-.253.607-.315.81-.315.203 0 .405.002.582.01.187.01.437-.07.684.522.253.604.86 2.088.935 2.24.075.15.125.327.025.527-.1.2-.15.323-.298.498-.148.176-.312.393-.445.528-.148.148-.302.308-.13.604.173.296.767 1.263 1.646 2.047 1.131 1.008 2.084 1.32 2.38 1.47.297.148.47.124.643-.074.173-.198.74-.863.937-1.16.198-.295.396-.247.668-.148.27.1 1.717.81 2.012.957.296.148.493.222.566.346.074.123.074.714-.173 1.407z"/>
+          </svg>
+        </div>
+        <span style={{ position: "absolute", top: 0, right: 0, width: 12, height: 12, background: "#25D366", borderRadius: "50%", border: "2px solid white", animation: "pulse 1.5s infinite" }} />
       </div>
       <div>
-        <div className="text-sm font-bold text-gray-800">WhatsApp</div>
-        <div className="text-xs text-gray-500">9812330094</div>
+        <div style={{ fontSize: 14, fontWeight: 700, color: "#111" }}>WhatsApp</div>
+        <div style={{ fontSize: 12, color: "#555" }}>9812330094</div>
       </div>
     </a>
   );
