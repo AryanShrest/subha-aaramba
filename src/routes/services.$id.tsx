@@ -59,15 +59,35 @@ function ServiceDetail() {
     const dateStr = dates[selectedDate].toLocaleDateString("en", {
       weekday: "long", year: "numeric", month: "long", day: "numeric"
     });
-    const msg = `🧹 *New Booking Request*
-
-*Service:* ${service.title}
-*Provider:* ${service.vendor}
-*Date:* ${dateStr}
-*Time Slot:* ${selectedSlot}
-*Price:* Rs ${getFinalPrice().toLocaleString()}${promoApplied ? ` (${promoApplied}% off - code: ${promo.toUpperCase()})` : ""}
-
-Please confirm my booking. Thank you! 🙏`;
+    const line  = "─────────────────────────";
+    const msg = [
+      `┌${line}┐`,
+      `│  🧹 *BOOKING REQUEST*      │`,
+      `└${line}┘`,
+      ``,
+      `🏷️ *Service*`,
+      `› ${service.title}`,
+      ``,
+      `🏢 *Provider*`,
+      `› ${service.vendor} ✅`,
+      ``,
+      `📅 *Date*`,
+      `› ${dateStr}`,
+      ``,
+      `⏰ *Time Slot*`,
+      `› ${selectedSlot}`,
+      ``,
+      `💰 *Amount*`,
+      `› Rs ${getFinalPrice().toLocaleString()}${promoApplied ? ` _(${promoApplied}% off — ${promo.toUpperCase()})_` : ""}`,
+      ``,
+      `📍 *Location*`,
+      `› Kathmandu, Nepal`,
+      ``,
+      line,
+      `✅ Please *confirm* my booking!`,
+      `📞 +977 9812330094`,
+      line,
+    ].join("\n");
     window.open(`https://wa.me/9779812330094?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
