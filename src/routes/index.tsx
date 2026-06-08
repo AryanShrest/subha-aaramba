@@ -149,16 +149,16 @@ function Hero() {
       <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 60%, white 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24 lg:px-8">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur">
+          <div className="hero-badge inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur">
             <BadgeCheck size={14} /> Trusted in Kathmandu Valley
           </div>
-          <h1 className="mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
+          <h1 className="hero-title mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
             Clean Tank Nepal — Sewer, Tank &amp; Plumbing Cleaning <span className="text-[var(--accent)]">Done Right.</span>
           </h1>
-          <p className="mt-5 max-w-xl text-base text-white/85 sm:text-lg">
+          <p className="hero-subtitle mt-5 max-w-xl text-base text-white/85 sm:text-lg">
             Hygienic water tank cleaning, septic & sewage clearing, and professional plumbing services across Kathmandu — booked in minutes.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="hero-buttons mt-8 flex flex-wrap gap-3">
             <a href="#services" className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-accent-foreground shadow-xl transition hover:opacity-90">
               View Services <ArrowRight size={16} />
             </a>
@@ -166,13 +166,13 @@ function Hero() {
               <Phone size={16} /> +977 9812330094
             </a>
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-white/80">
+          <div className="hero-badges mt-8 flex flex-wrap items-center gap-6 text-sm text-white/80">
             <div className="flex items-center gap-2"><ShieldCheck size={18} /> Verified workers</div>
             <div className="flex items-center gap-2"><Clock size={18} /> Same-day service</div>
             <div className="flex items-center gap-2"><Star size={18} className="fill-[var(--accent)] text-[var(--accent)]" /> 4.6 rated</div>
           </div>
         </div>
-        <div className="relative hidden lg:block">
+        <div className="hero-cards relative hidden lg:block">
           <div className="absolute -right-10 top-10 h-72 w-72 rounded-full bg-[var(--accent)]/30 blur-3xl" />
           <div className="relative grid grid-cols-2 gap-4">
             {[
