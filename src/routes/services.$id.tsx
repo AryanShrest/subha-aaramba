@@ -241,7 +241,19 @@ function ServiceDetail() {
               </div>
 
               <button
-                onClick={() => setBooked(true)}
+                onClick={() => {
+                const msg = `🧹 *New Booking Request*
+
+*Service:* ${service.title}
+*Vendor:* ${service.vendor}
+*Date:* ${dates[selectedDate].toDateString()}
+*Time:* ${selectedSlot}
+*Price:* Rs ${getFinalPrice().toLocaleString()}${promoApplied ? ` (${promoApplied}% off with code ${promo.toUpperCase()})` : ''}
+
+Please confirm my booking.`;
+                window.open(`https://wa.me/9779812330094?text=${encodeURIComponent(msg)}`, '_blank');
+                setBooked(true);
+              }}
                 className="mt-5 w-full rounded-xl bg-[var(--accent)] py-3 text-base font-extrabold text-accent-foreground shadow-lg transition hover:opacity-90 active:scale-95"
               >
                 Book Now
