@@ -4,6 +4,7 @@ import {
   Waves, ShieldCheck, Clock, ArrowRight,
   Facebook, Instagram, MessageCircle,
 } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -194,6 +195,7 @@ function Hero() {
 }
 
 function ServicesSection() {
+  const titleRef = useScrollAnimation<HTMLDivElement>();
   return (
     <section id="services" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <nav className="mb-3 flex items-center gap-2 text-sm text-[var(--brand)]">
@@ -201,20 +203,22 @@ function ServicesSection() {
         <a href="#" className="hover:underline">Tank Cleaning Service</a> <span className="text-muted-foreground">/</span>
         <span className="text-muted-foreground">View Service</span>
       </nav>
-      <div className="mb-8 flex items-end justify-between">
+      <div ref={titleRef} className="fade-up mb-8 flex items-end justify-between">
         <h2 className="text-3xl font-extrabold sm:text-4xl">Services</h2>
         <a href="#" className="hidden text-sm font-semibold text-[var(--brand)] hover:underline sm:inline">View all →</a>
       </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {services.map((s) => <ServiceCard key={s.title} s={s} />)}
+        {services.map((s, i) => <ServiceCard key={s.title} s={s} index={i} />)}
       </div>
     </section>
   );
 }
 
-function ServiceCard({ s }: { s: Service }) {
+function ServiceCard({ s, index }: { s: Service; index: number }) {
+  const ref = useScrollAnimation<HTMLElement>();
+  const delays = ["delay-100", "delay-200", "delay-300", "delay-400", "delay-100", "delay-200", "delay-300", "delay-400"];
   return (
-    <article className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+    <article ref={ref} className={`zoom-in ${delays[index % 4]} group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl`}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={s.imageUrl}
@@ -248,11 +252,12 @@ function Stats() {
     { n: "4.6★", l: "Average rating" },
     { n: "24/7", l: "Emergency support" },
   ];
+  const ref = useScrollAnimation<HTMLDivElement>();
   return (
     <section className="bg-gradient-to-r from-[var(--brand-deep)] to-[var(--brand)] py-12 text-primary-foreground">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
-        {stats.map((s) => (
-          <div key={s.l} className="text-center">
+      <div ref={ref} className="fade-up mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
+        {stats.map((s, i) => (
+          <div key={s.l} className={`text-center fade-up delay-${(i + 1) * 100}`}>
             <div className="text-4xl font-extrabold text-[var(--accent)]">{s.n}</div>
             <div className="mt-1 text-sm text-white/80">{s.l}</div>
           </div>
@@ -263,11 +268,13 @@ function Stats() {
 }
 
 function CTA() {
+  const leftRef = useScrollAnimation<HTMLDivElement>();
+  const rightRef = useScrollAnimation<HTMLFormElement>();
   return (
     <section id="contact" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-lg sm:p-12">
         <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-          <div>
+          <div ref={leftRef} className="fade-left">
             <h2 className="text-3xl font-extrabold sm:text-4xl">Need cleaning today?</h2>
             <p className="mt-3 text-muted-foreground">Call or message us — we'll dispatch a verified crew anywhere in Kathmandu within hours.</p>
             <div className="mt-6 space-y-3 text-sm">
@@ -276,7 +283,7 @@ function CTA() {
               <div className="flex items-center gap-3"><MapPin size={18} className="text-[var(--brand)]" /> Kathmandu, Nepal</div>
             </div>
           </div>
-          <form className="space-y-3 rounded-2xl bg-muted/50 p-6">
+          <form ref={rightRef} className="fade-right space-y-3 rounded-2xl bg-muted/50 p-6">
             <div className="grid gap-3 sm:grid-cols-2">
               <input className="rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Your name" />
               <input className="rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Phone" />
