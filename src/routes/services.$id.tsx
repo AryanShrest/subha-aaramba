@@ -178,13 +178,13 @@ function ServiceDetail() {
                     
                     if (trimmed.match(/^\d+\.\s/)) {
                       return (
-                        <p key={i} className="text-muted-foreground leading-relaxed m-0 mt-1">{trimmed}</p>
+                        <p key={i} className="text-muted-foreground leading-relaxed m-0">{trimmed}</p>
                       );
                     }
                     
                     if (trimmed.startsWith("• ")) {
                       return (
-                        <div key={i} className="flex items-start gap-2 text-muted-foreground m-0 mt-1">
+                        <div key={i} className="flex items-start gap-2 text-muted-foreground m-0">
                           <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand)]" />
                           <span className="leading-relaxed">{trimmed.slice(2)}</span>
                         </div>
@@ -192,7 +192,7 @@ function ServiceDetail() {
                     }
                     
                     return (
-                      <p key={i} className="text-muted-foreground leading-relaxed m-0 mt-1">
+                      <p key={i} className="text-muted-foreground leading-relaxed m-0">
                         {trimmed}
                       </p>
                     );
