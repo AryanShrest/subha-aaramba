@@ -156,7 +156,7 @@ function ServiceDetail() {
                 <span className="text-sm font-semibold">{service.rating.toFixed(1)}</span>
                 <span className="text-sm text-muted-foreground">({service.reviews} reviews)</span>
               </div>
-              <div className="mt-4">
+              <div className="mt-4 space-y-0">
                 {service.description
                   .replace(/\r/g, '')
                   .split('\n')
@@ -172,27 +172,27 @@ function ServiceDetail() {
                     
                     if (isHeading) {
                       return (
-                        <h2 key={i} className="text-xl font-bold text-foreground mt-4 first:mt-0">{trimmed}</h2>
+                        <h2 key={i} className="text-xl font-bold text-foreground mt-4 first:mt-0 mb-0">{trimmed}</h2>
                       );
                     }
                     
                     if (trimmed.match(/^\d+\.\s/)) {
                       return (
-                        <p key={i} className="text-muted-foreground leading-relaxed m-0">{trimmed}</p>
+                        <p key={i} className="text-muted-foreground leading-tight m-0 p-0">{trimmed}</p>
                       );
                     }
                     
                     if (trimmed.startsWith("• ")) {
                       return (
-                        <div key={i} className="flex items-start gap-2 text-muted-foreground m-0">
+                        <div key={i} className="flex items-start gap-2 text-muted-foreground m-0 p-0">
                           <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand)]" />
-                          <span className="leading-relaxed">{trimmed.slice(2)}</span>
+                          <span className="leading-tight">{trimmed.slice(2)}</span>
                         </div>
                       );
                     }
                     
                     return (
-                      <p key={i} className="text-muted-foreground leading-relaxed m-0">
+                      <p key={i} className="text-muted-foreground leading-tight m-0 p-0">
                         {trimmed}
                       </p>
                     );

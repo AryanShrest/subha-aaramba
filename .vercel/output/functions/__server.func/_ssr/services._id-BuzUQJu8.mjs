@@ -1,7 +1,7 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useNavigate } from "../_libs/tanstack__react-router.mjs";
 import { s as supabase } from "./supabase-iFuljuaK.mjs";
-import { R as Route } from "./router-azkyeWCT.mjs";
+import { R as Route } from "./router-DAo-5yKU.mjs";
 import { D as Droplets, g as MapPin, b as Phone, i as ArrowLeft, d as Star, B as BadgeCheck, c as Clock, j as Tag } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -145,21 +145,21 @@ function ServiceDetail() {
                 " reviews)"
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 space-y-4", children: service.description.replace(/\r/g, "").split(/\n+/).map((l) => l.trim()).filter((l) => l).map((trimmed, i) => {
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4", children: service.description.replace(/\r/g, "").split("\n").map((l) => l.trim()).filter((l) => l.length > 0).map((trimmed, i) => {
               const isHeading = trimmed.startsWith("Service Overview") || trimmed.startsWith("Why ") || trimmed.startsWith("Problems ") || trimmed.startsWith("What's Included") || trimmed.startsWith("Our service includes");
               if (isHeading) {
                 return /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-bold text-foreground mt-4 first:mt-0", children: trimmed }, i);
               }
               if (trimmed.match(/^\d+\.\s/)) {
-                return /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground leading-relaxed", children: trimmed }, i);
+                return /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground leading-relaxed m-0", children: trimmed }, i);
               }
               if (trimmed.startsWith("• ")) {
-                return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-2 text-muted-foreground", children: [
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-2 text-muted-foreground m-0", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand)]" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "leading-relaxed", children: trimmed.slice(2) })
                 ] }, i);
               }
-              return /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground leading-relaxed", children: trimmed }, i);
+              return /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground leading-relaxed m-0", children: trimmed }, i);
             }) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3", children: ["Verified Workers", "Eco-friendly", "Same-day", "Insurance covered", "Free inspection", "24/7 support"].map((f) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-xs font-medium", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(BadgeCheck, { size: 13, className: "text-[var(--brand)]" }),
