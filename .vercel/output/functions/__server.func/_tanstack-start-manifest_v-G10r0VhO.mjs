@@ -1,4 +1,0 @@
-const tsrStartManifest = () => ({ routes: { __root__: { filePath: "D:/kathmandu-clean-pros/src/routes/__root.tsx", children: ["/", "/admin", "/services/$id"], preloads: ["/assets/index-DQl3Rl8Q.js"], scripts: [{ attrs: { type: "module", async: true, src: "/assets/index-DQl3Rl8Q.js" } }] }, "/": { filePath: "D:/kathmandu-clean-pros/src/routes/index.tsx", children: void 0, preloads: ["/assets/index-xzg3kZDt.js", "/assets/createLucideIcon-CyXMOaBU.js", "/assets/star-Boedv6GO.js"] }, "/admin": { filePath: "D:/kathmandu-clean-pros/src/routes/admin.tsx", children: void 0, preloads: ["/assets/admin-BmeD3htx.js", "/assets/createLucideIcon-CyXMOaBU.js"] }, "/services/$id": { filePath: "D:/kathmandu-clean-pros/src/routes/services.$id.tsx", children: void 0, preloads: ["/assets/services._id-BOfLTCqE.js", "/assets/createLucideIcon-CyXMOaBU.js", "/assets/star-Boedv6GO.js"] } } });
-export {
-  tsrStartManifest
-};
