@@ -161,9 +161,8 @@ function ServiceDetail() {
                   .replace(/\r/g, '')
                   .split('\n')
                   .map(l => l.trim())
+                  .filter(l => l.length > 0)
                   .map((trimmed, i) => {
-                    if (!trimmed) return null;
-                    
                     const isHeading = 
                       trimmed.startsWith("Service Overview") || 
                       trimmed.startsWith("Why ") || 
