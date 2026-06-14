@@ -8,7 +8,6 @@ export const supabase = createClient(
 export type Service = {
   id: string;
   title: string;
-  vendor: string;
   price: string;
   description: string;
   rating: number;

@@ -182,9 +182,6 @@ function ServiceCard({ s, index }: { s: Service; index: number }) {
       <div className="p-4">
         <h3 className="line-clamp-1 font-bold text-foreground">{s.title}</h3>
         <div className="mt-2 flex items-center justify-between text-sm">
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <span>{s.vendor}</span>
-          </div>
           <div className="flex items-center gap-1">
             <Star size={14} className="fill-[var(--rating)] text-[var(--rating)]" />
             <span className="font-semibold">{s.rating.toFixed(1)}</span>
