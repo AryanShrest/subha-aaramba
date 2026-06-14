@@ -68,6 +68,9 @@ function ServiceDetail() {
       `🏷️ *Service*`,
       `› ${service.title}`,
       ``,
+      `🏢 *Provider*`,
+      `› ${service.vendor} ✅`,
+      ``,
       `📅 *Date*`,
       `› ${dateStr}`,
       ``,
@@ -146,7 +149,7 @@ function ServiceDetail() {
               <div className="flex items-start justify-between gap-4">
                 <h1 className="text-2xl font-extrabold">{service.title}</h1>
                 <div className="flex shrink-0 items-center gap-1 rounded-full bg-orange-50 px-3 py-1 text-sm font-semibold text-orange-600">
-                  <BadgeCheck size={15} /> Verified
+                  <BadgeCheck size={15} /> {service.vendor}
                 </div>
               </div>
               <div className="mt-3 flex items-center gap-2">
