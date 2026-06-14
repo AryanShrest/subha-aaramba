@@ -161,11 +161,14 @@ function ServiceDetail() {
               </div>
               <div className="mt-4 rounded-xl bg-muted/50 p-4">
                 <h2 className="font-bold">About this service</h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  Our professional team uses advanced machinery and eco-friendly disinfectants to remove dirt, algae, and bacteria.
-                  Ideal for households, apartments, and offices across Kathmandu, Lalitpur and Bhaktapur.
-                </p>
+                <div className="mt-3 space-y-2">
+                  {service.description.split(/\n|\r\n/).filter(l => l.trim()).map((line, i) => (
+                    <div key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--brand)]/10 text-[10px] font-bold text-[var(--brand)]">{i + 1}</span>
+                      <span className="leading-relaxed">{line.trim()}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {["Verified Workers","Eco-friendly","Same-day","Insurance covered","Free inspection","24/7 support"].map(f => (
