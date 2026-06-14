@@ -156,13 +156,14 @@ function ServiceDetail() {
                 <span className="text-sm font-semibold">{service.rating.toFixed(1)}</span>
                 <span className="text-sm text-muted-foreground">({service.reviews} reviews)</span>
               </div>
-              <div className="mt-4 space-y-4">
+              <div className="mt-4">
                 {service.description
                   .replace(/\r/g, '')
-                  .split(/\n+/)
+                  .split('\n')
                   .map(l => l.trim())
-                  .filter(l => l)
                   .map((trimmed, i) => {
+                    if (!trimmed) return null;
+                    
                     const isHeading = 
                       trimmed.startsWith("Service Overview") || 
                       trimmed.startsWith("Why ") || 
@@ -178,13 +179,13 @@ function ServiceDetail() {
                     
                     if (trimmed.match(/^\d+\.\s/)) {
                       return (
-                        <p key={i} className="text-muted-foreground leading-relaxed">{trimmed}</p>
+                        <p key={i} className="text-muted-foreground leading-relaxed m-0 mt-1">{trimmed}</p>
                       );
                     }
                     
                     if (trimmed.startsWith("• ")) {
                       return (
-                        <div key={i} className="flex items-start gap-2 text-muted-foreground">
+                        <div key={i} className="flex items-start gap-2 text-muted-foreground m-0 mt-1">
                           <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand)]" />
                           <span className="leading-relaxed">{trimmed.slice(2)}</span>
                         </div>
@@ -192,7 +193,7 @@ function ServiceDetail() {
                     }
                     
                     return (
-                      <p key={i} className="text-muted-foreground leading-relaxed">
+                      <p key={i} className="text-muted-foreground leading-relaxed m-0 mt-1">
                         {trimmed}
                       </p>
                     );
