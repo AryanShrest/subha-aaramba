@@ -1,125 +1,17 @@
-import { createFileRoute, useSearch, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { supabase, type Service } from "@/lib/supabase";
-import { Trash2, Upload, Plus, Pencil, X, Check, Lock, ArrowRight } from "lucide-react";
-
-// ⚠️ CHANGE THESE CREDENTIALS TO YOUR OWN
-const ADMIN_ID = "netra";
-const ADMIN_PROCESS = "bahadur";
+import { Trash2, Upload, Plus, Pencil, X, Check, LogOut, Droplets } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
-  validateSearch: (search: Record<string, string>) => ({
-    id: search.id || '',
-    process: search.process || '',
-  }),
   component: Admin,
 });
 
 const EMPTY = { title: "", price: "", description: "", rating: 4.5, reviews: 0 };
 
 function Admin() {
-  const search = useSearch({ from: Route.id });
   const navigate = useNavigate();
-  
-  // Check authentication
-  const isAuthenticated = search.id === ADMIN_ID && search.process === ADMIN_PROCESS;
-  
-  if (!isAuthenticated) {
-    return <LoginForm />;
-  }
-
-  return <AdminPanel />;
-}
-
-function LoginForm() {
-  const [id, setId] = useState("");
-  const [process, setProcess] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!id || !process) {
-      setError("Please fill in all fields.");
-      return;
-    }
-    if (id === ADMIN_ID && process === ADMIN_PROCESS) {
-      navigate({ to: "/admin", search: { id, process } });
-    } else {
-      setError("❌ Invalid ID or Process code. Access denied.");
-      setId("");
-      setProcess("");
-    }
-  };
-
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[var(--brand-deep)] via-[var(--brand)] to-sky-500 p-4">
-      <div className="w-full max-w-md rounded-2xl border border-white/20 bg-card/95 shadow-2xl backdrop-blur">
-        <div className="space-y-6 p-8">
-          <div className="flex flex-col items-center gap-3">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--brand)]/20">
-              <Lock size={28} className="text-[var(--brand)]" />
-            </div>
-            <h1 className="text-2xl font-extrabold">Admin Access</h1>
-            <p className="text-center text-sm text-muted-foreground">
-              Enter your ID and Process code to manage services
-            </p>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <label className="text-sm font-semibold">ID</label>
-              <input
-                type="text"
-                placeholder="Enter your ID"
-                value={id}
-                onChange={(e) => {
-                  setId(e.target.value);
-                  setError("");
-                }}
-                className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2 text-sm focus:border-[var(--brand)] focus:outline-none"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-semibold">Process Code</label>
-              <input
-                type="password"
-                placeholder="Enter your Process code"
-                value={process}
-                onChange={(e) => {
-                  setProcess(e.target.value);
-                  setError("");
-                }}
-                className="mt-2 w-full rounded-lg border border-border bg-background px-4 py-2 text-sm focus:border-[var(--brand)] focus:outline-none"
-              />
-            </div>
-
-            {error && (
-              <div className="rounded-lg bg-destructive/10 px-4 py-2 text-sm font-medium text-destructive">
-                {error}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--brand)] py-3 font-semibold text-white transition hover:opacity-90"
-            >
-              <Lock size={18} /> Access Admin Panel
-            </button>
-          </form>
-
-          <p className="text-center text-xs text-muted-foreground">
-            Unauthorized access attempts may be logged.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function AdminPanel() {
-  const search = useSearch({ from: Route.id });
-  const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [services, setServices] = useState<Service[]>([]);
   const [form, setForm] = useState(EMPTY);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -149,7 +41,31 @@ function AdminPanel() {
     autoResize(editTextareaRef);
   }, [editForm.description]);
 
-  useEffect(() => { fetchServices(); }, []);
+  // Check authentication on mount
+  useEffect(() => {
+    const auth = localStorage.getItem("adminAuth");
+    if (auth) {
+      try {
+        const parsed = JSON.parse(auth);
+        if (parsed.isLoggedIn) {
+          setIsAuthenticated(true);
+        } else {
+          navigate({ to: "/admin/login" });
+        }
+      } catch {
+        navigate({ to: "/admin/login" });
+      }
+    } else {
+      navigate({ to: "/admin/login" });
+    }
+  }, [navigate]);
+
+  // Fetch services only if authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchServices();
+    }
+  }, [isAuthenticated]);
 
   async function fetchServices() {
     const { data } = await supabase.from("services").select("*").order("created_at", { ascending: false });
@@ -209,25 +125,45 @@ function AdminPanel() {
     setEditLoading(false);
   }
 
-  const handleLogout = () => {
-    navigate({ to: "/admin" });
-  };
+  function handleLogout() {
+    localStorage.removeItem("adminAuth");
+    navigate({ to: "/admin/login" });
+  }
+
+  if (!isAuthenticated) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
 
   return (
-    <div className="min-h-screen bg-background p-4 sm:p-8">
-      <div className="mx-auto max-w-4xl">
-        <div className="mb-8 flex items-center justify-between">
-          <h1 className="text-3xl font-extrabold text-foreground">Admin — Manage Services</h1>
+    <div className="min-h-screen bg-background">
+      {/* Admin Header */}
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
+        <div className="mx-auto max-w-4xl px-4 py-3 sm:px-8 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[var(--brand)] text-white shadow-lg">
+              <Droplets size={22} />
+            </div>
+            <div>
+              <div className="font-bold text-[var(--brand-deep)]">Admin Panel</div>
+              <div className="text-xs text-muted-foreground">शुभ आरम्भ Cleaning</div>
+            </div>
+          </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 rounded-lg bg-destructive px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+            className="flex items-center gap-2 rounded-md bg-destructive/10 text-destructive px-3 py-2 text-sm font-semibold hover:bg-destructive/20 transition"
           >
-            <ArrowRight size={16} /> Logout
+            <LogOut size={16} /> Logout
           </button>
         </div>
+      </header>
 
-        {/* Add Service Form */}
-        <form onSubmit={handleSubmit} className="mb-12 space-y-4 rounded-2xl border border-border bg-card p-6 shadow">
+      {/* Main Content */}
+      <div className="p-4 sm:p-8">
+        <div className="mx-auto max-w-4xl">
+          <h1 className="mb-8 text-3xl font-extrabold text-foreground">Manage Services</h1>
+
+          {/* Add Service Form */}
+          <form onSubmit={handleSubmit} className="mb-12 space-y-4 rounded-2xl border border-border bg-card p-6 shadow">
           <h2 className="text-xl font-bold">Add New Service</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <input required className="rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Service title" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
@@ -252,11 +188,11 @@ function AdminPanel() {
           <button type="submit" disabled={loading} className="flex items-center gap-2 rounded-lg bg-[var(--brand)] px-6 py-2 font-semibold text-white transition hover:opacity-90 disabled:opacity-50">
             <Plus size={18} /> {loading ? "Uploading..." : "Add Service"}
           </button>
-        </form>
+          </form>
 
-        {/* Services List */}
-        <h2 className="mb-4 text-xl font-bold">Existing Services ({services.length})</h2>
-        <div className="space-y-4">
+          {/* Services List */}
+          <h2 className="mb-4 text-xl font-bold">Existing Services ({services.length})</h2>
+          <div className="space-y-4">
           {services.map(s => (
             <div key={s.id} className="rounded-xl border border-border bg-card p-4 shadow-sm">
               {editId === s.id ? (
@@ -310,6 +246,7 @@ function AdminPanel() {
             </div>
           ))}
           {services.length === 0 && <p className="text-muted-foreground">No services yet. Add one above!</p>}
+        </div>
         </div>
       </div>
     </div>
