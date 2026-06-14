@@ -218,7 +218,7 @@ function ServicesSection({ services, loading }: { services: Service[]; loading: 
       </nav>
       <div ref={titleRef} className="fade-up mb-8 flex items-end justify-between">
         <h2 className="text-3xl font-extrabold sm:text-4xl">Services</h2>
-        <a href="#" className="hidden items-center gap-2 rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-accent-foreground shadow-md transition hover:opacity-90 sm:inline-flex">View all →</a>
+        <Link to="/services" className="hidden items-center gap-2 rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-accent-foreground shadow-md transition hover:opacity-90 sm:inline-flex">View all →</Link>
       </div>
       {loading ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
