@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase, type Service } from "@/lib/supabase";
 import { Trash2, Upload, Plus, Pencil, X, Check } from "lucide-react";
 
@@ -7,7 +7,7 @@ export const Route = createFileRoute("/admin")({
   component: Admin,
 });
 
-const EMPTY = { title: "", vendor: "", price: "", description: "", rating: 4.5, reviews: 0 };
+const EMPTY = { title: "", price: "", description: "", rating: 4.5, reviews: 0 };
 
 function Admin() {
   const [services, setServices] = useState<Service[]>([]);
@@ -20,6 +20,24 @@ function Admin() {
   const [editForm, setEditForm] = useState<Partial<Service>>({});
   const [editImageFile, setEditImageFile] = useState<File | null>(null);
   const [editLoading, setEditLoading] = useState(false);
+  
+  const addTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const editTextareaRef = useRef<HTMLTextAreaElement>(null);
+  
+  const autoResize = (ref: React.RefObject<HTMLTextAreaElement>) => {
+    if (ref.current) {
+      ref.current.style.height = "auto";
+      ref.current.style.height = ref.current.scrollHeight + "px";
+    }
+  };
+  
+  useEffect(() => {
+    autoResize(addTextareaRef);
+  }, [form.description]);
+  
+  useEffect(() => {
+    autoResize(editTextareaRef);
+  }, [editForm.description]);
 
   useEffect(() => { fetchServices(); }, []);
 
@@ -63,8 +81,9 @@ function Admin() {
 
   function startEdit(s: Service) {
     setEditId(s.id);
-    setEditForm({ title: s.title, vendor: s.vendor, price: s.price, description: s.description, rating: s.rating, reviews: s.reviews });
+    setEditForm({ title: s.title, price: s.price, description: s.description, rating: s.rating, reviews: s.reviews });
     setEditImageFile(null);
+    setTimeout(() => autoResize(editTextareaRef), 0);
   }
 
   async function handleSaveEdit(s: Service) {
@@ -94,7 +113,7 @@ function Admin() {
             <input required type="number" min="1" max="5" step="0.1" className="rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Rating (1-5)" value={form.rating} onChange={e => setForm(f => ({ ...f, rating: parseFloat(e.target.value) }))} />
             <input type="number" min="0" className="rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Review count" value={form.reviews} onChange={e => setForm(f => ({ ...f, reviews: parseInt(e.target.value) }))} />
           </div>
-          <textarea required rows={3} className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Description" value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} />
+          <textarea required ref={addTextareaRef} rows={1} style={{ minHeight: "100px", resize: "vertical", overflow: "hidden" }} className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Description" value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} />
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-border p-4 hover:border-[var(--brand)]">
               <Upload size={24} className="text-muted-foreground" />
@@ -137,7 +156,7 @@ function Admin() {
                     <input type="number" min="1" max="5" step="0.1" className="rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Rating" value={editForm.rating ?? ""} onChange={e => setEditForm(f => ({ ...f, rating: parseFloat(e.target.value) }))} />
                     <input type="number" min="0" className="rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Reviews" value={editForm.reviews ?? ""} onChange={e => setEditForm(f => ({ ...f, reviews: parseInt(e.target.value) }))} />
                   </div>
-                  <textarea rows={2} className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Description" value={editForm.description ?? ""} onChange={e => setEditForm(f => ({ ...f, description: e.target.value }))} />
+                  <textarea ref={editTextareaRef} rows={1} style={{ minHeight: "100px", resize: "vertical", overflow: "hidden" }} className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Description" value={editForm.description ?? ""} onChange={e => setEditForm(f => ({ ...f, description: e.target.value }))} />
                   <div className="flex gap-2">
                     <button onClick={() => handleSaveEdit(s)} disabled={editLoading} className="flex items-center gap-1 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50">
                       <Check size={15} /> {editLoading ? "Saving..." : "Save"}

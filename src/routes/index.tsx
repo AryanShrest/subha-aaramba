@@ -39,12 +39,82 @@ function Index() {
         <Header />
         <Hero />
         <ServicesSection services={services} loading={loading} />
+        <AboutUs />
         <Stats />
         <CTA services={services} />
         <Footer />
       </div>
       <WhatsAppButton />
     </>
+  );
+}
+
+function AboutUs() {
+  const ref = useScrollAnimation<HTMLDivElement>();
+  return (
+    <section id="about" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 bg-muted/30">
+      <div ref={ref} className="fade-up grid gap-12 lg:grid-cols-2 items-center">
+        <div className="relative">
+          <img 
+            src="/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp" 
+            alt="Clean Tank Nepal - Professional Cleaning Team" 
+            className="rounded-3xl shadow-2xl object-cover" 
+            style={{ height: '450px', width: '100%' }}
+          />
+          <div className="absolute -bottom-6 -right-6 bg-[var(--accent)] text-white rounded-2xl p-6 shadow-xl">
+            <div className="text-4xl font-extrabold">12+</div>
+            <div className="text-sm font-semibold">Years Experience</div>
+          </div>
+        </div>
+        <div className="space-y-6">
+          <div>
+            <div className="text-sm font-semibold text-[var(--brand)] uppercase tracking-wider">About Us</div>
+            <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Kathmandu's Most Trusted Cleaning Service</h2>
+          </div>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            At शुभ आरम्भ Cleaning, we've been keeping Kathmandu's water tanks, septic systems, and plumbing clean and hygienic for over 12 years. Our mission is to provide reliable, affordable, and eco-friendly cleaning services that protect your family's health.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="flex items-start gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand)]/10 text-[var(--brand)]">
+                <BadgeCheck size={24} />
+              </div>
+              <div>
+                <div className="font-semibold">Verified Workers</div>
+                <div className="text-sm text-muted-foreground">All our staff are background-checked and trained</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand)]/10 text-[var(--brand)]">
+                <ShieldCheck size={24} />
+              </div>
+              <div>
+                <div className="font-semibold">Fully Insured</div>
+                <div className="text-sm text-muted-foreground">Your property is protected with full insurance</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand)]/10 text-[var(--brand)]">
+                <Clock size={24} />
+              </div>
+              <div>
+                <div className="font-semibold">Same-Day Service</div>
+                <div className="text-sm text-muted-foreground">We can dispatch a team within hours</div>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand)]/10 text-[var(--brand)]">
+                <Waves size={24} />
+              </div>
+              <div>
+                <div className="font-semibold">Eco-Friendly</div>
+                <div className="text-sm text-muted-foreground">We use safe, biodegradable cleaning products</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -63,7 +133,7 @@ function Header() {
         </a>
         <nav className="hidden gap-8 text-sm font-medium md:flex">
           <a href="#services" className="hover:text-[var(--brand)]">Services</a>
-          <a href="#features" className="hover:text-[var(--brand)]">Why Us</a>
+          <a href="#about" className="hover:text-[var(--brand)]">About Us</a>
           <a href="#contact" className="hover:text-[var(--brand)]">Contact</a>
         </nav>
         <a href="tel:+9779812330094" className="hidden items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-accent-foreground shadow-md transition hover:opacity-90 sm:inline-flex">
@@ -182,9 +252,6 @@ function ServiceCard({ s, index }: { s: Service; index: number }) {
       <div className="p-4">
         <h3 className="line-clamp-1 font-bold text-foreground">{s.title}</h3>
         <div className="mt-2 flex items-center justify-between text-sm">
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <span>{s.vendor}</span>
-          </div>
           <div className="flex items-center gap-1">
             <Star size={14} className="fill-[var(--rating)] text-[var(--rating)]" />
             <span className="font-semibold">{s.rating.toFixed(1)}</span>

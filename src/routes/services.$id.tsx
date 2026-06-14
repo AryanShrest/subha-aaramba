@@ -148,9 +148,6 @@ function ServiceDetail() {
             <div className="p-6">
               <div className="flex items-start justify-between gap-4">
                 <h1 className="text-2xl font-extrabold">{service.title}</h1>
-                <div className="flex shrink-0 items-center gap-1 rounded-full bg-orange-50 px-3 py-1 text-sm font-semibold text-orange-600">
-                  <BadgeCheck size={15} /> {service.vendor}
-                </div>
               </div>
               <div className="mt-3 flex items-center gap-2">
                 {[...Array(5)].map((_, i) => (
@@ -159,16 +156,47 @@ function ServiceDetail() {
                 <span className="text-sm font-semibold">{service.rating.toFixed(1)}</span>
                 <span className="text-sm text-muted-foreground">({service.reviews} reviews)</span>
               </div>
-              <div className="mt-4 rounded-xl bg-muted/50 p-4">
-                <h2 className="font-bold">About this service</h2>
-                <div className="mt-3 space-y-2">
-                  {service.description.split(/\n|\r\n/).filter(l => l.trim()).map((line, i) => (
-                    <div key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--brand)]/10 text-[10px] font-bold text-[var(--brand)]">{i + 1}</span>
-                      <span className="leading-relaxed">{line.trim()}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="mt-4 space-y-4">
+                {service.description
+                  .replace(/\r/g, '')
+                  .split(/\n+/)
+                  .map(l => l.trim())
+                  .filter(l => l)
+                  .map((trimmed, i) => {
+                    const isHeading = 
+                      trimmed.startsWith("Service Overview") || 
+                      trimmed.startsWith("Why ") || 
+                      trimmed.startsWith("Problems ") ||
+                      trimmed.startsWith("What's Included") ||
+                      trimmed.startsWith("Our service includes");
+                    
+                    if (isHeading) {
+                      return (
+                        <h2 key={i} className="text-xl font-bold text-foreground mt-4 first:mt-0">{trimmed}</h2>
+                      );
+                    }
+                    
+                    if (trimmed.match(/^\d+\.\s/)) {
+                      return (
+                        <p key={i} className="text-muted-foreground leading-relaxed">{trimmed}</p>
+                      );
+                    }
+                    
+                    if (trimmed.startsWith("• ")) {
+                      return (
+                        <div key={i} className="flex items-start gap-2 text-muted-foreground">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand)]" />
+                          <span className="leading-relaxed">{trimmed.slice(2)}</span>
+                        </div>
+                      );
+                    }
+                    
+                    return (
+                      <p key={i} className="text-muted-foreground leading-relaxed">
+                        {trimmed}
+                      </p>
+                    );
+                  })}
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {["Verified Workers","Eco-friendly","Same-day","Insurance covered","Free inspection","24/7 support"].map(f => (
