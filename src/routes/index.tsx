@@ -52,16 +52,16 @@ function Index() {
 function AboutUs() {
   const ref = useScrollAnimation<HTMLDivElement>();
   return (
-    <section id="about" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 bg-muted/30">
+    <section id="about" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 bg-muted/30">
       <div ref={ref} className="fade-up grid gap-12 lg:grid-cols-2 items-center">
         <div className="relative">
           <img 
             src="/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp" 
             alt="Clean Tank Nepal - Professional Cleaning Team" 
-            className="rounded-3xl shadow-2xl object-cover" 
+            className="rounded-md shadow-2xl object-cover" 
             style={{ height: '450px', width: '100%' }}
           />
-          <div className="absolute -bottom-6 -right-6 bg-[var(--accent)] text-white rounded-2xl p-6 shadow-xl">
+          <div className="absolute -bottom-6 -right-6 bg-[var(--accent)] text-white rounded-md p-6 shadow-xl">
             <div className="text-4xl font-extrabold">12+</div>
             <div className="text-sm font-semibold">Years Experience</div>
           </div>
@@ -75,7 +75,7 @@ function AboutUs() {
             At शुभ आरम्भ Cleaning, we've been keeping Kathmandu's water tanks, septic systems, and plumbing clean and hygienic for over 12 years. Our mission is to provide reliable, affordable, and eco-friendly cleaning services that protect your family's health.
           </p>
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="flex items-start gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
+            <div className="flex items-start gap-3 p-4 bg-card rounded-md border border-border shadow-sm">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand)]/10 text-[var(--brand)]">
                 <BadgeCheck size={24} />
               </div>
@@ -84,7 +84,7 @@ function AboutUs() {
                 <div className="text-sm text-muted-foreground">All our staff are background-checked and trained</div>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
+            <div className="flex items-start gap-3 p-4 bg-card rounded-md border border-border shadow-sm">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand)]/10 text-[var(--brand)]">
                 <ShieldCheck size={24} />
               </div>
@@ -93,7 +93,7 @@ function AboutUs() {
                 <div className="text-sm text-muted-foreground">Your property is protected with full insurance</div>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
+            <div className="flex items-start gap-3 p-4 bg-card rounded-md border border-border shadow-sm">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand)]/10 text-[var(--brand)]">
                 <Clock size={24} />
               </div>
@@ -102,7 +102,7 @@ function AboutUs() {
                 <div className="text-sm text-muted-foreground">We can dispatch a team within hours</div>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-4 bg-card rounded-2xl border border-border shadow-sm">
+            <div className="flex items-start gap-3 p-4 bg-card rounded-md border border-border shadow-sm">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand)]/10 text-[var(--brand)]">
                 <Waves size={24} />
               </div>
@@ -123,7 +123,7 @@ function Header() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="#" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--brand)] text-primary-foreground shadow-lg">
+          <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[var(--brand)] text-primary-foreground shadow-lg">
             <Droplets size={22} />
           </div>
           <div className="leading-tight">
@@ -136,7 +136,7 @@ function Header() {
           <a href="#about" className="hover:text-[var(--brand)]">About Us</a>
           <a href="#contact" className="hover:text-[var(--brand)]">Contact</a>
         </nav>
-        <a href="tel:+9779812330094" className="hidden items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-accent-foreground shadow-md transition hover:opacity-90 sm:inline-flex">
+        <a href="tel:+9779812330094" className="hidden items-center gap-2 rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-accent-foreground shadow-md transition hover:opacity-90 sm:inline-flex">
           <Phone size={16} /> Book Now
         </a>
       </div>
@@ -160,7 +160,7 @@ function Hero() {
           <div className="hero-badge inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur">
             <BadgeCheck size={14} /> Trusted in Kathmandu Valley
           </div>
-          <h1 className="hero-title mt-5 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
+          <h1 className="hero-title mt-4 text-2xl font-extrabold leading-tight sm:text-3xl lg:text-4xl">
             <span className={`typewriter-cursor${done ? " done" : ""}`}>{displayed}</span>
             {done && (
               <> — Sewer, Tank &amp; Plumbing Cleaning{" "}
@@ -168,33 +168,33 @@ function Hero() {
               </>
             )}
           </h1>
-          <p className="hero-subtitle mt-5 max-w-xl text-base text-white/85 sm:text-lg">
+          <p className="hero-subtitle mt-4 max-w-xl text-sm text-white/85 sm:text-base">
             Hygienic water tank cleaning, septic &amp; sewage clearing, and professional plumbing services across Kathmandu — booked in minutes.
           </p>
           <div className="hero-buttons mt-8 flex flex-wrap gap-3">
-            <a href="#services" className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-bold text-accent-foreground shadow-xl transition hover:opacity-90">
+            <a href="#services" className="inline-flex items-center gap-2 rounded-md bg-[var(--accent)] px-6 py-3 text-sm font-bold text-accent-foreground shadow-xl transition hover:opacity-90">
               View Services <ArrowRight size={16} />
             </a>
-            <a href="tel:+9779812330094" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-bold backdrop-blur hover:bg-white/20">
+            <a href="tel:+9779812330094" className="inline-flex items-center gap-2 rounded-md border border-white/40 bg-white/10 px-6 py-3 text-sm font-bold backdrop-blur hover:bg-white/20">
               <Phone size={16} /> +977 9812330094
             </a>
           </div>
-          <div className="hero-badges mt-8 flex flex-wrap items-center gap-6 text-sm text-white/80">
+          <div className="hero-badges mt-6 flex flex-wrap items-center gap-6 text-sm text-white/80">
             <div className="blur-up-1 flex items-center gap-2"><ShieldCheck size={18} /> Verified workers</div>
             <div className="blur-up-2 flex items-center gap-2"><Clock size={18} /> Same-day service</div>
             <div className="blur-up-3 flex items-center gap-2"><Star size={18} className="fill-[var(--accent)] text-[var(--accent)]" /> 4.6 rated</div>
           </div>
         </div>
-        <div className="hero-cards relative hidden lg:block">
+        <div className="hero-cards relative hidden lg:block ml-6">
           <div className="absolute -right-10 top-10 h-72 w-72 rounded-full bg-[var(--accent)]/30 blur-3xl" />
-          <div className="relative grid grid-cols-2 gap-4">
+          <div className="relative grid grid-cols-2 gap-6">
             {[
               { I: Droplets, label: "Tank Cleaning" },
               { I: Truck, label: "Septic" },
               { I: Wrench, label: "Plumbing" },
               { I: Waves, label: "Sewage" },
             ].map(({ I, label }, i) => (
-              <div key={i} className={`blur-up-${i + 1} rounded-2xl border border-white/20 bg-white/10 p-6 backdrop-blur-md transition hover:scale-105 hover:bg-white/20`}>
+              <div key={i} className={`blur-up-${i + 1} rounded-md border border-white/20 bg-white/10 p-6 backdrop-blur-md transition hover:scale-105 hover:bg-white/20`}>
                 <I size={32} className="text-[var(--accent)]" />
                 <div className="mt-3 font-bold">{label}</div>
                 <div className="text-xs text-white/70">Pro service</div>
@@ -210,7 +210,7 @@ function Hero() {
 function ServicesSection({ services, loading }: { services: Service[]; loading: boolean }) {
   const titleRef = useScrollAnimation<HTMLDivElement>();
   return (
-    <section id="services" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <section id="services" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <nav className="mb-3 flex items-center gap-2 text-sm text-[var(--brand)]">
         <a href="#" className="hover:underline">Home</a> <span className="text-muted-foreground">/</span>
         <a href="#" className="hover:underline">Tank Cleaning Service</a> <span className="text-muted-foreground">/</span>
@@ -218,11 +218,11 @@ function ServicesSection({ services, loading }: { services: Service[]; loading: 
       </nav>
       <div ref={titleRef} className="fade-up mb-8 flex items-end justify-between">
         <h2 className="text-3xl font-extrabold sm:text-4xl">Services</h2>
-        <a href="#" className="hidden text-sm font-semibold text-[var(--brand)] hover:underline sm:inline">View all →</a>
+        <a href="#" className="hidden items-center gap-2 rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-accent-foreground shadow-md transition hover:opacity-90 sm:inline-flex">View all →</a>
       </div>
       {loading ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {[...Array(4)].map((_, i) => <div key={i} className="h-64 animate-pulse rounded-2xl bg-muted" />)}
+          {[...Array(4)].map((_, i) => <div key={i} className="h-64 animate-pulse rounded-md bg-muted" />)}
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -238,7 +238,7 @@ function ServiceCard({ s, index }: { s: Service; index: number }) {
   const delays = ["delay-100", "delay-200", "delay-300", "delay-400"];
   return (
     <Link to="/services/$id" params={{ id: s.id }} className="block">
-    <article ref={ref} className={`zoom-in ${delays[index % 4]} group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl`}>
+    <article ref={ref} className={`zoom-in ${delays[index % 4]} group cursor-pointer overflow-hidden rounded-md border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-xl`}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={s.image_url}
@@ -304,8 +304,8 @@ function CTA({ services }: { services: Service[] }) {
   const leftRef = useScrollAnimation<HTMLDivElement>();
   const rightRef = useScrollAnimation<HTMLFormElement>();
   return (
-    <section id="contact" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-lg sm:p-12">
+    <section id="contact" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="overflow-hidden rounded-md border-2 border-[var(--accent)] bg-card p-8 shadow-lg sm:p-12">
         <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
           <div ref={leftRef} className="fade-left">
             <h2 className="text-3xl font-extrabold sm:text-4xl">Need cleaning today?</h2>
@@ -316,17 +316,17 @@ function CTA({ services }: { services: Service[] }) {
               <div className="flex items-center gap-3"><MapPin size={18} className="text-[var(--brand)]" /> Kathmandu, Nepal</div>
             </div>
           </div>
-          <form ref={rightRef} className="fade-right space-y-3 rounded-2xl bg-muted/50 p-6">
+          <form ref={rightRef} className="fade-right space-y-3 rounded-md bg-muted/50 p-6">
             <div className="grid gap-3 sm:grid-cols-2">
-              <input className="rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Your name" />
-              <input className="rounded-lg border border-border bg-background px-3 py-2 text-sm" placeholder="Phone" />
+              <input className="rounded-md border border-border bg-background px-3 py-2 text-sm" placeholder="Your name" />
+              <input className="rounded-md border border-border bg-background px-3 py-2 text-sm" placeholder="Phone" />
             </div>
-            <select className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm">
+            <select className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
               <option>Select a service</option>
               {services.map(s => <option key={s.title}>{s.title}</option>)}
             </select>
-            <textarea className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm" rows={3} placeholder="Address / message" />
-            <button type="button" className="w-full rounded-lg bg-[var(--accent)] py-3 font-semibold text-accent-foreground transition hover:opacity-90">
+            <textarea className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm" rows={3} placeholder="Address / message" />
+            <button type="button" className="w-full rounded-md bg-[var(--accent)] py-3 font-semibold text-accent-foreground transition hover:opacity-90">
               Request a Quote
             </button>
           </form>
@@ -383,7 +383,7 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
           <div className="flex items-center gap-2 text-white">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[var(--accent)]"><Droplets size={18} /></div>
+            <div className="flex h-9 w-9 items-center justify-center rounded-md bg-[var(--accent)]"><Droplets size={18} /></div>
             <span className="font-bold">शुभ आरम्भ Cleaning</span>
           </div>
           <p className="mt-3 text-sm">Kathmandu's trusted name for tank, sewer & plumbing cleaning.</p>
