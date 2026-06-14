@@ -12,6 +12,7 @@ const EMPTY = { title: "", price: "", description: "", rating: 4.5, reviews: 0 }
 function Admin() {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
   const [services, setServices] = useState<Service[]>([]);
   const [form, setForm] = useState(EMPTY);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -41,8 +42,11 @@ function Admin() {
     autoResize(editTextareaRef);
   }, [editForm.description]);
 
-  // Check authentication on mount
+  // Check authentication on mount (client-side only)
   useEffect(() => {
+    if (typeof window === "undefined") return; // Skip on server
+    
+    setIsChecking(true);
     const auth = localStorage.getItem("adminAuth");
     if (auth) {
       try {
@@ -58,7 +62,8 @@ function Admin() {
     } else {
       navigate({ to: "/admin/login" });
     }
-  }, [navigate]);
+    setIsChecking(false);
+  }, []);
 
   // Fetch services only if authenticated
   useEffect(() => {
@@ -130,8 +135,12 @@ function Admin() {
     navigate({ to: "/admin/login" });
   }
 
+  if (isChecking) {
+    return <div className="min-h-screen bg-background flex items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>;
+  }
+
   if (!isAuthenticated) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return null; // Redirecting, don't render anything
   }
 
   return (

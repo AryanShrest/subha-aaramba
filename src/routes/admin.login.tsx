@@ -29,13 +29,15 @@ function AdminLogin() {
     const ADMIN_PASSWORD = "bahadur";
 
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      // Store session in localStorage
-      localStorage.setItem("adminAuth", JSON.stringify({
-        isLoggedIn: true,
-        username: username,
-        loginTime: new Date().toISOString(),
-      }));
-      navigate({ to: "/admin" });
+      // Store session in localStorage (client-side only)
+      if (typeof window !== "undefined") {
+        localStorage.setItem("adminAuth", JSON.stringify({
+          isLoggedIn: true,
+          username: username,
+          loginTime: new Date().toISOString(),
+        }));
+        navigate({ to: "/admin" });
+      }
     } else {
       setError("Invalid username or password");
       setLoading(false);
