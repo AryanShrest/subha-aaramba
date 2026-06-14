@@ -4,8 +4,8 @@ import { supabase, type Service } from "@/lib/supabase";
 import { Trash2, Upload, Plus, Pencil, X, Check, Lock, ArrowRight } from "lucide-react";
 
 // ⚠️ CHANGE THESE CREDENTIALS TO YOUR OWN
-const ADMIN_ID = "admin";
-const ADMIN_PROCESS = "process123";
+const ADMIN_ID = "netra";
+const ADMIN_PROCESS = "bahadur";
 
 export const Route = createFileRoute("/admin")({
   validateSearch: (search: Record<string, string>) => ({
