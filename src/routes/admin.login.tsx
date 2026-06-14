@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Lock, Droplets } from "lucide-react";
 
@@ -17,9 +17,8 @@ function AdminLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -29,14 +28,15 @@ function AdminLogin() {
     const ADMIN_PASSWORD = "bahadur";
 
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      // Store session in localStorage (client-side only)
+      // Store session in localStorage
       if (typeof window !== "undefined") {
         localStorage.setItem("adminAuth", JSON.stringify({
           isLoggedIn: true,
           username: username,
           loginTime: new Date().toISOString(),
         }));
-        navigate({ to: "/admin" });
+        // Use window.location for reliable redirect
+        window.location.href = "/admin";
       }
     } else {
       setError("Invalid username or password");

@@ -1,18 +1,57 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { supabase, type Service } from "@/lib/supabase";
 import { Trash2, Upload, Plus, Pencil, X, Check, LogOut, Droplets } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
-  component: Admin,
+  component: AdminPage,
 });
+
+function AdminRedirect() {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.location.href = "/admin/login";
+    }
+  }, []);
+
+  return <div className="min-h-screen flex items-center justify-center">Redirecting to login...</div>;
+}
+
+function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const auth = localStorage.getItem("adminAuth");
+    if (auth) {
+      try {
+        const parsed = JSON.parse(auth);
+        if (parsed.isLoggedIn) {
+          setIsAuthenticated(true);
+          return;
+        }
+      } catch (e) {
+        console.error("Auth parse error:", e);
+      }
+    }
+    setIsAuthenticated(false);
+  }, []);
+
+  if (isAuthenticated === null) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
+
+  if (isAuthenticated === false) {
+    return <AdminRedirect />;
+  }
+
+  return <Admin />;
+}
 
 const EMPTY = { title: "", price: "", description: "", rating: 4.5, reviews: 0 };
 
 function Admin() {
-  const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isChecking, setIsChecking] = useState(true);
   const [services, setServices] = useState<Service[]>([]);
   const [form, setForm] = useState(EMPTY);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -42,35 +81,7 @@ function Admin() {
     autoResize(editTextareaRef);
   }, [editForm.description]);
 
-  // Check authentication on mount (client-side only)
-  useEffect(() => {
-    if (typeof window === "undefined") return; // Skip on server
-    
-    setIsChecking(true);
-    const auth = localStorage.getItem("adminAuth");
-    if (auth) {
-      try {
-        const parsed = JSON.parse(auth);
-        if (parsed.isLoggedIn) {
-          setIsAuthenticated(true);
-        } else {
-          navigate({ to: "/admin/login" });
-        }
-      } catch {
-        navigate({ to: "/admin/login" });
-      }
-    } else {
-      navigate({ to: "/admin/login" });
-    }
-    setIsChecking(false);
-  }, []);
-
-  // Fetch services only if authenticated
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchServices();
-    }
-  }, [isAuthenticated]);
+  useEffect(() => { fetchServices(); }, []);
 
   async function fetchServices() {
     const { data } = await supabase.from("services").select("*").order("created_at", { ascending: false });
@@ -132,15 +143,9 @@ function Admin() {
 
   function handleLogout() {
     localStorage.removeItem("adminAuth");
-    navigate({ to: "/admin/login" });
-  }
-
-  if (isChecking) {
-    return <div className="min-h-screen bg-background flex items-center justify-center"><div className="text-muted-foreground">Loading...</div></div>;
-  }
-
-  if (!isAuthenticated) {
-    return null; // Redirecting, don't render anything
+    if (typeof window !== "undefined") {
+      window.location.href = "/admin/login";
+    }
   }
 
   return (
