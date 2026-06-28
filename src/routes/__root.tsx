@@ -81,15 +81,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "शुभ आरम्भ Cleaning Service" },
       { name: "robots", content: "index, follow" },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://clean-tank-nepal.aaryanshrestha00.com.np" },
-      { property: "og:image", content: "https://clean-tank-nepal.aaryanshrestha00.com.np/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp" },
+      { property: "og:url", content: "https://drainagecleaningnepal.com" },
+      { property: "og:image", content: "https://drainagecleaningnepal.com/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "geo.region", content: "NP-BA" },
       { name: "geo.placename", content: "Kathmandu" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "canonical", href: "https://clean-tank-nepal.aaryanshrestha00.com.np" },
+      { rel: "canonical", href: "https://drainagecleaningnepal.com" },
     ],
     scripts: [
       {

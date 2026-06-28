@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 // Define your site URL
-const SITE_URL = "https://clean-tank-nepal.aaryanshrestha00.com.np";
+const SITE_URL = "https://drainagecleaningnepal.com";
 
 export default defineEventHandler(async (event) => {
   // Initialize Supabase client
