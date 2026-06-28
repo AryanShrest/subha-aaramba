@@ -4,9 +4,9 @@ import { createClient } from "@supabase/supabase-js";
 const SITE_URL = "https://drainagecleaningnepal.com";
 
 export default defineEventHandler(async (event) => {
-  // Initialize Supabase client
-  const supabaseUrl = process.env.VITE_SUPABASE_URL!;
-  const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY!;
+  // Initialize Supabase client - using hardcoded values like src/lib/supabase.ts
+  const supabaseUrl = "https://bdwwiokeojuqmwyfusos.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkd3dpb2tlb2p1cW13eWZ1c29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MjYzNjEsImV4cCI6MjA5NjUwMjM2MX0.fkoEnI5pzSJIiQL1UF8pna3HqzFQR9NixWKTX3XOgzI";
   const supabase = createClient(supabaseUrl, supabaseKey);
 
   // Fetch services from Supabase
