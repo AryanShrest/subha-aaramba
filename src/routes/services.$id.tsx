@@ -151,9 +151,9 @@ function ServiceDetail() {
               </div>
               <div className="mt-3 flex items-center gap-2">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} className={i < Math.round(service.rating) ? "fill-[var(--rating)] text-[var(--rating)]" : "text-muted"} />
+                  <Star key={i} size={16} className={i < Math.round(service.rating ?? 0) ? "fill-[var(--rating)] text-[var(--rating)]" : "text-muted"} />
                 ))}
-                <span className="text-sm font-semibold">{service.rating.toFixed(1)}</span>
+                <span className="text-sm font-semibold">{(service.rating ?? 0).toFixed(1)}</span>
                 <span className="text-sm text-muted-foreground">({service.reviews} reviews)</span>
               </div>
               <div className="mt-4 space-y-0">
