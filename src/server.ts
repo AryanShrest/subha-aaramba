@@ -21,8 +21,8 @@ async function getServerEntry(): Promise<ServerEntry> {
 
 async function generateSitemap(): Promise<string> {
   const SITE_URL = "https://drainagecleaningnepal.com";
-  const supabaseUrl = "https://bdwwiokeojuqmwyfusos.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJkd3dpb2tlb2p1cW13eWZ1c29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5MjYzNjEsImV4cCI6MjA5NjUwMjM2MX0.fkoEnI5pzSJIiQL1UF8pna3HqzFQR9NixWKTX3XOgzI";
+  const supabaseUrl = "https://gfjvjatvibiwkbgeymlt.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdmanZqYXR2aWJpd2tiZ2V5bWx0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxMzM1NTIsImV4cCI6MjA5OTcwOTU1Mn0.yRcJtzLBi6cZ_DQf7b2BWipwQXyXWVJLK4vZNoBayVw";
   const supabase = createClient(supabaseUrl, supabaseKey);
 
   const { data: services } = await supabase
