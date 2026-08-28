@@ -5,33 +5,26 @@ import {
   Facebook, Instagram, MessageCircle,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useTypewriter, useCounter } from "@/hooks/useTextAnimations";
-import { useState, useEffect, type RefObject } from "react";
-import { supabase, type Service } from "@/lib/supabase";
+import { useCounter } from "@/hooks/useTextAnimations";
+import { useState, type RefObject } from "react";
+import { SERVICES, type Service } from "@/lib/supabase";
 import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Clean Tank Nepal | Water Tank, Septic & Plumbing Cleaning Kathmandu" },
-      { name: "description", content: "Clean Tank Nepal offers professional overhead tank, reserve tank, septic tank, sewage and plumbing cleaning in Kathmandu, Lalitpur & Bhaktapur. Trusted, affordable, same-day service. Book now." },
-      { property: "og:title", content: "Clean Tank Nepal | Water Tank & Plumbing Cleaning Kathmandu" },
-      { property: "og:description", content: "Professional tank cleaning, septic & sewage clearing, and plumbing services across Kathmandu valley. Verified workers. Same-day service." },
+      { title: "Drainage Cleaning Nepal | Drainage, Septic & Water Tank Cleaning" },
+      { name: "description", content: "Drainage Cleaning Nepal provides professional drainage, septic tank, sewage, water tank and plumbing cleaning services in Kathmandu, Nepal." },
+      { property: "og:title", content: "Drainage Cleaning Nepal | Drainage, Septic & Water Tank Cleaning" },
+      { property: "og:description", content: "Drainage Cleaning Nepal provides professional drainage, septic tank, sewage, water tank and plumbing cleaning services in Kathmandu, Nepal." },
     ],
   }),
   component: Index,
 });
 
 function Index() {
-  const [services, setServices] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    supabase.from("services").select("*").order("created_at").then(({ data }) => {
-      if (data) setServices(data);
-      setLoading(false);
-    });
-  }, []);
+  const services: Service[] = SERVICES;
+  const loading = false;
 
   return (
     <>
@@ -72,7 +65,7 @@ function AboutUs() {
             <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">Kathmandu's Most Trusted Cleaning Service</h2>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            At शुभ आरम्भ Cleaning, we've been keeping Kathmandu's water tanks, septic systems, and plumbing clean and hygienic for over 12 years. Our mission is to provide reliable, affordable, and eco-friendly cleaning services that protect your family's health.
+            Choose Drainage Cleaning Nepal for reliable drainage, septic tank and sewage cleaning. We've been serving Kathmandu for over 12 years with eco-friendly, affordable services that protect your family's health.
           </p>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex items-start gap-3 p-4 bg-card rounded-md border border-border shadow-sm">
@@ -146,7 +139,6 @@ function Header() {
 
 function Hero() {
   const heroRef = useScrollAnimation<HTMLDivElement>("hero-visible", 0.1);
-  const { displayed, done } = useTypewriter("Clean Tank Nepal", 70, 300);
   return (
     <section className="relative overflow-hidden text-primary-foreground">
       <div
@@ -160,16 +152,12 @@ function Hero() {
           <div className="hero-badge inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur">
             <BadgeCheck size={14} /> Trusted in Kathmandu Valley
           </div>
-          <h1 className="hero-title mt-4 text-2xl font-extrabold leading-tight sm:text-3xl lg:text-4xl">
-            <span className={`typewriter-cursor${done ? " done" : ""}`}>{displayed}</span>
-            {done && (
-              <> — Sewer, Tank &amp; Plumbing Cleaning{" "}
-                <span className="shimmer-text animated-underline">Done Right.</span>
-              </>
-            )}
+          <h1 className="hero-title mt-4 leading-tight">
+            <span className="block text-2xl font-extrabold sm:text-3xl lg:text-4xl">Drainage Cleaning Nepal</span>
+            <span className="block mt-2 text-base font-semibold text-white/90 sm:text-lg lg:text-xl">Professional Drainage, Septic Tank &amp; Water Tank Cleaning Services in Kathmandu</span>
           </h1>
           <p className="hero-subtitle mt-4 max-w-xl text-sm text-white/85 sm:text-base">
-            Hygienic water tank cleaning, septic &amp; sewage clearing, and professional plumbing services across Kathmandu — booked in minutes.
+            Drainage Cleaning Nepal provides professional drainage cleaning services in Kathmandu — hygienic, affordable, and booked in minutes.
           </p>
           <div className="hero-buttons mt-8 flex flex-wrap gap-3">
             <a href="#services" className="inline-flex items-center gap-2 rounded-md bg-[var(--accent)] px-6 py-3 text-sm font-bold text-accent-foreground shadow-xl transition hover:opacity-90">
