@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { BUSINESS, localBusinessSchema } from "../lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -77,64 +78,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "keywords", content: "drainage cleaning nepal, drainage cleaning kathmandu, septic tank cleaning kathmandu, water tank cleaning nepal, sewage cleaning nepal, plumbing service kathmandu" },
-      { name: "author", content: "Drainage Cleaning Nepal" },
-      { name: "robots", content: "index, follow" },
+      { title: "Drainage Cleaning Nepal | Drainage, Septic & Water Tank Cleaning" },
+      {
+        name: "description",
+        content:
+          "Professional drainage, septic tank, sewage, water tank and plumbing cleaning services in Kathmandu, Lalitpur and Bhaktapur. Call +977 9812330094.",
+      },
+      { name: "author", content: BUSINESS.name },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://drainagecleaningnepal.com" },
-      { property: "og:image", content: "https://drainagecleaningnepal.com/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp" },
+      { property: "og:site_name", content: BUSINESS.name },
+      { property: "og:locale", content: "en_NP" },
+      { property: "og:image", content: BUSINESS.image },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#1d4ed8" },
       { name: "geo.region", content: "NP-BA" },
       { name: "geo.placename", content: "Kathmandu" },
     ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "canonical", href: "https://drainagecleaningnepal.com" },
-    ],
+    links: [{ rel: "stylesheet", href: appCss }],
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": "Drainage Cleaning Nepal",
-          "url": "https://drainagecleaningnepal.com/",
-          "description": "Professional drainage, septic tank, sewage, water tank and plumbing cleaning services in Kathmandu, Nepal.",
-          "telephone": "+977-9812330094",
-          "image": "https://drainagecleaningnepal.com/images/Septic-tank-cleaning-in-Lalitpur-1-1024x538.webp",
-          "priceRange": "Rs 1500 - Rs 5500",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Kathmandu",
-            "addressRegion": "Bagmati",
-            "addressCountry": "NP"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": "Kathmandu"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "27.7172",
-            "longitude": "85.3240"
-          },
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Cleaning Services",
-            "itemListElement": [
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Drainage Cleaning" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Septic Tank Cleaning" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Water Tank Cleaning" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sewage Cleaning" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plumbing Repair" } }
-            ]
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.6",
-            "reviewCount": "38"
-          }
-        }),
+        children: JSON.stringify(localBusinessSchema),
       },
     ],
   }),
@@ -146,7 +111,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="ne">
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
