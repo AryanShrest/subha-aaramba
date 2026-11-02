@@ -2,7 +2,7 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
-import { SITE_URL, SITE_LASTMOD, SITEMAP_PATHS } from "./lib/seo";
+import { createClient } from "@supabase/supabase-js";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -19,20 +19,42 @@ async function getServerEntry(): Promise<ServerEntry> {
   return serverEntryPromise;
 }
 
-function generateSitemap(): string {
-  const urls = SITEMAP_PATHS.map(
-    ({ path, changefreq, priority }) => `  <url>
-    <loc>${SITE_URL}${path === "/" ? "/" : path}</loc>
-    <lastmod>${SITE_LASTMOD}</lastmod>
-    <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
-  </url>`,
-  ).join("\n");
+async function generateSitemap(): Promise<string> {
+  const SITE_URL = "https://drainagecleaningnepal.com";
+  const supabaseUrl = "https://gfjvjatvibiwkbgeymlt.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdmanZqYXR2aWJpd2tiZ2V5bWx0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxMzM1NTIsImV4cCI6MjA5OTcwOTU1Mn0.yRcJtzLBi6cZ_DQf7b2BWipwQXyXWVJLK4vZNoBayVw";
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
-  return `<?xml version="1.0" encoding="UTF-8"?>
+  const { data: services } = await supabase
+    .from("services")
+    .select("id")
+    .order("created_at", { ascending: false });
+
+  let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
+  <url>
+    <loc>${SITE_URL}/</loc>
+    <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>`;
+
+  if (services) {
+    services.forEach((service) => {
+      sitemap += `
+  <url>
+    <loc>${SITE_URL}/services/${service.id}</loc>
+    <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+    });
+  }
+
+  sitemap += `
 </urlset>`;
+
+  return sitemap;
 }
 
 // h3 swallows in-handler throws into a normal 500 Response with body
@@ -60,19 +82,14 @@ export default {
       const url = new URL(request.url);
       console.log("Incoming request:", url.pathname);
 
-      if (url.hostname.startsWith("www.")) {
-        const target = new URL(url.toString());
-        target.hostname = url.hostname.slice(4);
-        return Response.redirect(target.toString(), 308);
-      }
-
       if (
         url.pathname === "/sitemap.xml" ||
         url.pathname === "/sitemao.xml" ||
         url.pathname === "/site.xml"
       ) {
         console.log(`Serving ${url.pathname}!`);
-        return new Response(generateSitemap(), {
+        const sitemap = await generateSitemap();
+        return new Response(sitemap, {
           headers: {
             "Content-Type": "application/xml; charset=utf-8",
           },
