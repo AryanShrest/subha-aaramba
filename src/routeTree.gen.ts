@@ -9,27 +9,36 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WaterTankCleaningLalitpurRouteImport } from './routes/water-tank-cleaning-lalitpur'
-import { Route as WaterTankCleaningKathmanduRouteImport } from './routes/water-tank-cleaning-kathmandu'
-import { Route as SepticTankCleaningKathmanduRouteImport } from './routes/septic-tank-cleaning-kathmandu'
-import { Route as DrainageCleaningKathmanduRouteImport } from './routes/drainage-cleaning-kathmandu'
-import { Route as DrainCleaningBhaktapurRouteImport } from './routes/drain-cleaning-bhaktapur'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as DrainCleaningBhaktapurRouteImport } from './routes/drain-cleaning-bhaktapur'
+import { Route as DrainageCleaningKathmanduRouteImport } from './routes/drainage-cleaning-kathmandu'
+import { Route as SepticTankCleaningKathmanduRouteImport } from './routes/septic-tank-cleaning-kathmandu'
+import { Route as WaterTankCleaningKathmanduRouteImport } from './routes/water-tank-cleaning-kathmandu'
+import { Route as WaterTankCleaningLalitpurRouteImport } from './routes/water-tank-cleaning-lalitpur'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesIdRouteImport } from './routes/services.$id'
-import { Route as AdminLoginRouteImport } from './routes/admin.login'
 
-const WaterTankCleaningLalitpurRoute =
-  WaterTankCleaningLalitpurRouteImport.update({
-    id: '/water-tank-cleaning-lalitpur',
-    path: '/water-tank-cleaning-lalitpur',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const WaterTankCleaningKathmanduRoute =
-  WaterTankCleaningKathmanduRouteImport.update({
-    id: '/water-tank-cleaning-kathmandu',
-    path: '/water-tank-cleaning-kathmandu',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DrainCleaningBhaktapurRoute = DrainCleaningBhaktapurRouteImport.update({
+  id: '/drain-cleaning-bhaktapur',
+  path: '/drain-cleaning-bhaktapur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DrainageCleaningKathmanduRoute =
+  DrainageCleaningKathmanduRouteImport.update({
+    id: '/drainage-cleaning-kathmandu',
+    path: '/drainage-cleaning-kathmandu',
     getParentRoute: () => rootRouteImport,
   } as any)
 const SepticTankCleaningKathmanduRoute =
@@ -38,26 +47,22 @@ const SepticTankCleaningKathmanduRoute =
     path: '/septic-tank-cleaning-kathmandu',
     getParentRoute: () => rootRouteImport,
   } as any)
-const DrainageCleaningKathmanduRoute =
-  DrainageCleaningKathmanduRouteImport.update({
-    id: '/drainage-cleaning-kathmandu',
-    path: '/drainage-cleaning-kathmandu',
+const WaterTankCleaningKathmanduRoute =
+  WaterTankCleaningKathmanduRouteImport.update({
+    id: '/water-tank-cleaning-kathmandu',
+    path: '/water-tank-cleaning-kathmandu',
     getParentRoute: () => rootRouteImport,
   } as any)
-const DrainCleaningBhaktapurRoute = DrainCleaningBhaktapurRouteImport.update({
-  id: '/drain-cleaning-bhaktapur',
-  path: '/drain-cleaning-bhaktapur',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
+const WaterTankCleaningLalitpurRoute =
+  WaterTankCleaningLalitpurRouteImport.update({
+    id: '/water-tank-cleaning-lalitpur',
+    path: '/water-tank-cleaning-lalitpur',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
 } as any)
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/services/',
@@ -68,11 +73,6 @@ const ServicesIdRoute = ServicesIdRouteImport.update({
   id: '/services/$id',
   path: '/services/$id',
   getParentRoute: () => rootRouteImport,
-} as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => AdminRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -165,39 +165,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/water-tank-cleaning-lalitpur': {
-      id: '/water-tank-cleaning-lalitpur'
-      path: '/water-tank-cleaning-lalitpur'
-      fullPath: '/water-tank-cleaning-lalitpur'
-      preLoaderRoute: typeof WaterTankCleaningLalitpurRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/water-tank-cleaning-kathmandu': {
-      id: '/water-tank-cleaning-kathmandu'
-      path: '/water-tank-cleaning-kathmandu'
-      fullPath: '/water-tank-cleaning-kathmandu'
-      preLoaderRoute: typeof WaterTankCleaningKathmanduRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/septic-tank-cleaning-kathmandu': {
-      id: '/septic-tank-cleaning-kathmandu'
-      path: '/septic-tank-cleaning-kathmandu'
-      fullPath: '/septic-tank-cleaning-kathmandu'
-      preLoaderRoute: typeof SepticTankCleaningKathmanduRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/drainage-cleaning-kathmandu': {
-      id: '/drainage-cleaning-kathmandu'
-      path: '/drainage-cleaning-kathmandu'
-      fullPath: '/drainage-cleaning-kathmandu'
-      preLoaderRoute: typeof DrainageCleaningKathmanduRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/drain-cleaning-bhaktapur': {
-      id: '/drain-cleaning-bhaktapur'
-      path: '/drain-cleaning-bhaktapur'
-      fullPath: '/drain-cleaning-bhaktapur'
-      preLoaderRoute: typeof DrainCleaningBhaktapurRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -207,12 +179,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/drain-cleaning-bhaktapur': {
+      id: '/drain-cleaning-bhaktapur'
+      path: '/drain-cleaning-bhaktapur'
+      fullPath: '/drain-cleaning-bhaktapur'
+      preLoaderRoute: typeof DrainCleaningBhaktapurRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/drainage-cleaning-kathmandu': {
+      id: '/drainage-cleaning-kathmandu'
+      path: '/drainage-cleaning-kathmandu'
+      fullPath: '/drainage-cleaning-kathmandu'
+      preLoaderRoute: typeof DrainageCleaningKathmanduRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/septic-tank-cleaning-kathmandu': {
+      id: '/septic-tank-cleaning-kathmandu'
+      path: '/septic-tank-cleaning-kathmandu'
+      fullPath: '/septic-tank-cleaning-kathmandu'
+      preLoaderRoute: typeof SepticTankCleaningKathmanduRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/water-tank-cleaning-kathmandu': {
+      id: '/water-tank-cleaning-kathmandu'
+      path: '/water-tank-cleaning-kathmandu'
+      fullPath: '/water-tank-cleaning-kathmandu'
+      preLoaderRoute: typeof WaterTankCleaningKathmanduRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/water-tank-cleaning-lalitpur': {
+      id: '/water-tank-cleaning-lalitpur'
+      path: '/water-tank-cleaning-lalitpur'
+      fullPath: '/water-tank-cleaning-lalitpur'
+      preLoaderRoute: typeof WaterTankCleaningLalitpurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/services/': {
       id: '/services/'
@@ -227,13 +234,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/services/$id'
       preLoaderRoute: typeof ServicesIdRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/admin/login': {
-      id: '/admin/login'
-      path: '/login'
-      fullPath: '/admin/login'
-      preLoaderRoute: typeof AdminLoginRouteImport
-      parentRoute: typeof AdminRoute
     }
   }
 }
